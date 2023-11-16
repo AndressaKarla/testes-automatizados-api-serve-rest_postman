@@ -1,0 +1,339 @@
+{
+	"id": "ac2e1f5e-23aa-431a-82c7-b88019ca1809",
+	"name": "api-serve-rest_dev-environment",
+	"values": [
+		{
+			"key": "baseUri",
+			"value": "https://serverest.dev",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "nome1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "dominioEmail1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "email1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "password1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "idAdministrador",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nome2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "dominioEmail2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "email2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "password2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "idPadrao1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nome3",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "dominioEmail3",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "email3",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "password3",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "idPadrao2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "tokenAdministrador",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "tokenPadrao1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "tokenPadrao2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "numero1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "preco1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nomeProduto1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "descricao1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "quantidadeProduto1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "idProduto1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "numero2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "preco2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nomeProduto2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "descricao2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "quantidadeProduto2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "idProduto2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "numero3",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nomeProduto2Alterado",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "preco2NAOAlterado",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "descricao2NAOAlterada",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "quantidadeProduto2Alterada",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "numero4",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "preco3",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nomeProduto3",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "descricao3",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "quantidadeProduto3",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "idProduto3",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "getProdutoSchema",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "idCarrinho1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "idCarrinho2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "numero5",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nomeProduto4",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "preco4",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "descricao4",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "quantidadeProduto4",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "numero6",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nomeProduto5",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "preco5",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "descricao5",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "quantidadeProduto5",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-11-16T21:15:58.033Z",
+	"_postman_exported_using": "Postman/10.20.0"
+}

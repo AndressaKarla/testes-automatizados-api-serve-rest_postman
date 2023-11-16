@@ -1,0 +1,40 @@
+name: Pipeline Testes Automatizados API ServeRest Postman
+# executa o workflow toda vez que for realizado um push ou pull-request no repositório
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # permite também executar esse workflow manualmente na aba "Actions" do GitHub
+  workflow_dispatch:
+
+jobs:
+  testes-automatizados-api-serve-rest-postman:
+    # agente de execução/runner do tipo máquina virtual bem enxuta, sem interface gráfica
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Passo 1 - Obter cópia do código-fonte do repositório
+        uses: actions/checkout@v3
+
+      - name: Passo 2 - Verificar versões do Node e Newman
+        run: |
+          node --version
+          newman --version
+          
+      - name: Passo 3 - Instalar newman-reporter-htmlextra
+        run: sudo npm install -g newman-reporter-htmlextra
+        
+      - name: Passo 4 - Executar testes automatizados de API da collection e environment do Postman e Gerar relatório html 
+        run: newman run ./api-serve-rest_collection.json -e ./api-serve-rest_dev-environment.json --delay-request 2 --reporters cli, -r htmlextra --reporter-htmlextra-export ./relatorios/relatorio-api-serve-rest-postman.html
+   
+      - name: Passo 5 - Armazenar relatório html
+        uses: actions/upload-artifact@v3
+        # expressão condicional para que sempre seja executado independentemente dos resultados dos steps anteriores
+        if: ${{ always() }}
+        with: 
+            name: relatorio-api-serve-rest-postman
+            path: ./relatorios/relatorio-api-serve-rest-postman.html
+            # armazena o relatório html por 30 dias
+            retention-days: 30
