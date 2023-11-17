@@ -1,5 +1,5 @@
 ---
-# :test_tube: Projeto de Testes Automatizados de API | Postman | JSON Schema | Newman | GitHub Actions :test_tube:
+# :test_tube: Projeto de Testes Automatizados de API REST | Postman | JSON Schema | Newman | GitHub Actions :test_tube:
 ---
 # :information_source: Introdução 
 Esse projeto "testes-automatizados-api-serve-rest_postman" é executado em um ambiente de desenvolvimento na ["API REST"](https://serverest.dev) do ["ServeRest"](https://github.com/ServeRest) que simula uma loja virtual, com o objetivo de me aprofundar um pouco mais nos estudos sobre validações de testes de API (Ex.: JSON Schema, geração de massa de dados dinâmicos, etc) nas ferramentas Postman, Newman e GitHub Actions.
