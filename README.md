@@ -1,5 +1,5 @@
 ---
-# :test_tube: Projeto de Testes Automatizados de API REST | Postman | JSON Schema | Newman | GitHub Actions :test_tube:
+# Projeto de Testes Automatizados de API REST | Postman | JSON Schema | Newman | GitHub Actions :test_tube:
 ---
 # :information_source: Introdução 
 Esse projeto "testes-automatizados-api-serve-rest_postman" é executado em um ambiente de desenvolvimento na ["API REST"](https://serverest.dev) do ["ServeRest"](https://github.com/ServeRest) que simula uma loja virtual, com o objetivo de me aprofundar um pouco mais nos estudos sobre validações de testes de API (Ex.: JSON Schema, geração de massa de dados dinâmicos, etc) nas ferramentas Postman, Newman e GitHub Actions.
@@ -13,7 +13,7 @@ Esse projeto "testes-automatizados-api-serve-rest_postman" é executado em um am
 - Na seção "Artifacts", clicar em "relatorio-api-serve-rest-postman"
 - Na janela aberta, escolher um diretório para baixar a pasta compactada "relatorio-api-serve-rest-postman.zip"
 
-# :female_detective: Verificar no navegador padrão o relatório html gerado e armazenado anteriormente no GitHub Actions e descompactado no computador :male_detective: 
+# Verificar no navegador padrão o relatório html gerado e armazenado anteriormente no GitHub Actions e descompactado no computador :female_detective: 
 - Abrir uma janela do "Windows Explorer"
 - Acessar o diretório onde foi baixada a pasta compactada "relatorio-api-serve-rest-postman.zip" anteriormente
 - Descompactar a pasta
@@ -21,7 +21,7 @@ Esse projeto "testes-automatizados-api-serve-rest_postman" é executado em um am
 - Clicar 2 vezes sob o relatório "relatorio-api-serve-rest-postman.html" gerado e armazenado anteriormente no GitHub Actions e descompactado para ser aberto e verificado no navegador padrão no computador
 
   
-# :warning: Antes de clonar ou executar esse projeto localmente no computador, é necessário seguir as instruções abaixo :point_down:
+# Antes de clonar ou executar esse projeto localmente no computador, é necessário seguir as instruções abaixo :point_down:
 
 ## :hammer_and_wrench: Janela do "Windows Explorer", criar uma pasta "tools"
 - Abrir uma janela do "Windows Explorer"
@@ -143,7 +143,7 @@ newman run ./api-serve-rest_collection.json -e ./api-serve-rest_dev-environment.
 - Fechar esse cmder
 
 ---
-# :female_detective: Verificar no navegador padrão o relatório html gerado na pasta "relatorios" anteriormente no computador :male_detective: 
+# Verificar no navegador padrão o relatório html gerado na pasta "relatorios" anteriormente no computador :female_detective:
 - Abrir uma janela do "Windows Explorer"
 - Acessar o diretório onde foi clonado o projeto “testes-automatizados-api-serve-rest_postman”
 
