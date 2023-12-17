@@ -9,19 +9,13 @@
 			"enabled": true
 		},
 		{
-			"key": "nome1",
-			"value": "",
-			"type": "any",
-			"enabled": true
-		},
-		{
-			"key": "dominioEmail1",
-			"value": "",
-			"type": "any",
-			"enabled": true
-		},
-		{
 			"key": "email1",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nome1",
 			"value": "",
 			"type": "any",
 			"enabled": true
@@ -39,19 +33,13 @@
 			"enabled": true
 		},
 		{
-			"key": "nome2",
-			"value": "",
-			"type": "any",
-			"enabled": true
-		},
-		{
-			"key": "dominioEmail2",
-			"value": "",
-			"type": "any",
-			"enabled": true
-		},
-		{
 			"key": "email2",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "nome2",
 			"value": "",
 			"type": "any",
 			"enabled": true
@@ -70,12 +58,6 @@
 		},
 		{
 			"key": "nome3",
-			"value": "",
-			"type": "any",
-			"enabled": true
-		},
-		{
-			"key": "dominioEmail3",
 			"value": "",
 			"type": "any",
 			"enabled": true
@@ -334,6 +316,6 @@
 		}
 	],
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2023-11-16T21:15:58.033Z",
-	"_postman_exported_using": "Postman/10.20.0"
+	"_postman_exported_at": "2023-12-17T00:54:01.603Z",
+	"_postman_exported_using": "Postman/10.20.10"
 }
