@@ -122,7 +122,7 @@ Ex.:
 ```
 C:\PROJETOS\Automação\Postman\testes-automatizados-api-serve-rest_postman
 ```
-- Informar o comando abaixo para Executar testes automatizados de API da collection e environment do Postman com um tempo de espera de 2 ms entre as requisições e Gerar relatório diretamente no terminal
+- Informar o comando abaixo para executar testes automatizados de API da collection e environment do Postman com um tempo de espera de 2 ms entre as requisições e Gerar relatório diretamente no terminal
 ```
 newman run ./nome-collection.json -e ./nome-environment.json --delay-request 2
 ```
@@ -132,7 +132,7 @@ newman run ./api-serve-rest_collection.json -e ./api-serve-rest_dev-environment.
 ```
 
 # :dart: Executar testes automatizados de API da collection e environment do Postman e Gerar relatório html na pasta "relatorios" no computador
-- No cmder aberto anteriormente, informar o comando abaixo para Executar testes automatizados de API da collection e environment do Postman com um tempo de espera de 2 ms entre as requisições e Gerar relatório html na pasta "relatorios" no computador (comando semelhante ao que é utilizado no "Passo 4" da "Pipeline Testes Automatizados API ServeRest Postman" em ".github > workflows > [workflow-testes-automatizados-api-serve-rest-postman.yml](https://github.com/AndressaKarla/testes-automatizados-api-serve-rest_postman/blob/main/.github/workflows/workflow-testes-automatizados-api-serve-rest-postman.yml)" no GitHub Actions)
+- No cmder aberto anteriormente, informar o comando abaixo para executar testes automatizados de API da collection e environment do Postman com um tempo de espera de 2 ms entre as requisições e Gerar relatório html na pasta "relatorios" no computador (mesmo comando que é utilizado no "Passo 4" da "Pipeline Testes Automatizados API ServeRest Postman" em ".github > workflows > [workflow-testes-automatizados-api-serve-rest-postman.yml](https://github.com/AndressaKarla/testes-automatizados-api-serve-rest_postman/blob/main/.github/workflows/workflow-testes-automatizados-api-serve-rest-postman.yml)" no GitHub Actions)
 ```
 newman run ./nome-collection.json -e ./nome-environment.json --delay-request 2 --reporters cli, -r htmlextra --reporter-htmlextra-export ./relatorios/nome-relatorio.html
 ```
