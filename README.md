@@ -116,7 +116,7 @@ git clone git@github.com:AndressaKarla/testes-automatizados-api-serve-rest_postm
 # :dart: Executar testes automatizados de API da collection e environment do Postman e Gerar relatório diretamente no terminal no computador
 - No cmder aberto anteriormente, informar o comando abaixo para acessar o projeto “testes-automatizados-api-serve-rest_postman”
 ```
-cd "testes-automatizados-api-serve-rest_postman"
+cd testes-automatizados-api-serve-rest_postman
 ```
 Ex.: 
 ```
