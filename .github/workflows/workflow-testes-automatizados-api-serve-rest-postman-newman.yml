@@ -32,7 +32,7 @@ jobs:
       - name: Passo 5 - Armazenar report html
         # expressão condicional para que sempre seja executado independentemente dos resultados dos steps anteriores
         if: ${{ always() }}      
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with: 
             name: postman-api-serve-rest-report-html-newman
             path: ./reports
