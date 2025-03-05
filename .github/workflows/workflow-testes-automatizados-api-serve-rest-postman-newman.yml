@@ -61,7 +61,7 @@ jobs:
 
       - name: Passo 8 - Armazenar pages
         if: ${{ always() }}
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./reports
           retention-days: 30
