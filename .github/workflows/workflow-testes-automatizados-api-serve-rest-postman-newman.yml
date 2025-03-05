@@ -14,6 +14,15 @@ jobs:
     # agente de execução/runner 
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: https://andressakarla.github.io/testes-automatizados-api-serve-rest_postman/postman-api-serve-rest-report-htmlextra-newman.html    
+
     steps:
       - name: Passo 1 - Obter cópia do código-fonte do repositório
         uses: actions/checkout@v3
@@ -38,3 +47,26 @@ jobs:
             path: ./reports
             # armazena o report html por 30 dias
             retention-days: 30
+
+      - name: Passo 6 - Configurar pages
+        if: ${{ always() }}
+        uses: actions/configure-pages@v2
+
+      - name: Passo 7 - Baixar report html armazenado no "Passo 5 - Armazenar report html"
+        if: ${{ always() }}
+        uses: actions/download-artifact@v4
+        with: 
+          name: postman-api-serve-rest-report-html-newman
+          path: ./reports
+
+      - name: Passo 8 - Armazenar pages
+        if: ${{ always() }}
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./reports
+          retention-days: 30
+
+      - name: Passo 9 - Deploy/Publicar no Github Pages na "url" configurada em "postman-newman-api-serve-rest > environment"
+        if: ${{ always() }}
+        id: deployment
+        uses: actions/deploy-pages@v1

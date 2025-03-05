@@ -1,8 +1,8 @@
 ---
-# Projeto de Testes Funcionais Automatizados de API REST | Postman | Javascript | JSON Schema | Newman | GitHub Actions :test_tube:
+# Projeto de Testes Funcionais Automatizados de API REST | Postman | Javascript | JSON Schema | Newman | GitHub Actions | GitHub Pages :test_tube:
 ---
 # :information_source: Introdução 
-Esse projeto "testes-automatizados-api-serve-rest_postman" é executado em um ambiente de produção na ["API REST"](https://serverest.dev) do ["ServeRest"](https://github.com/ServeRest) que simula uma loja virtual, com o objetivo de praticar ainda mais validações de testes de API (Ex.: JSON Schema, geração de massa de dados dinâmicos, etc) em Postman, Javascript, Newman e GitHub Actions.
+Esse projeto "testes-automatizados-api-serve-rest_postman" é executado em um ambiente de produção na ["API REST"](https://serverest.dev) do ["ServeRest"](https://github.com/ServeRest) que simula uma loja virtual, com o objetivo de praticar ainda mais validações de testes de API (Ex.: JSON Schema, geração de massa de dados dinâmicos, etc) em Postman, Javascript, Newman, GitHub Actions e GitHub Pages.
 
 ---
 # :dart: Executar com Newman testes automatizados de API REST da collection e environment do Postman, Gerar e armazenar report html no GitHub Actions 
