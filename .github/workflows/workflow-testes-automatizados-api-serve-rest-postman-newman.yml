@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: Passo 1 - Obter cópia do código-fonte do repositório
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Passo 2 - Verificar versões do Node e Newman
         run: |
@@ -50,7 +50,7 @@ jobs:
 
       - name: Passo 6 - Configurar pages
         if: ${{ always() }}
-        uses: actions/configure-pages@v2
+        uses: actions/configure-pages@v4
 
       - name: Passo 7 - Baixar report html armazenado no "Passo 5 - Armazenar report html"
         if: ${{ always() }}
@@ -61,7 +61,7 @@ jobs:
 
       - name: Passo 8 - Armazenar pages
         if: ${{ always() }}
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./reports
           retention-days: 30
@@ -69,4 +69,4 @@ jobs:
       - name: Passo 9 - Deploy/Publicar no Github Pages na "url" configurada em "postman-newman-api-serve-rest > environment"
         if: ${{ always() }}
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
