@@ -1,44 +1,36 @@
 ---
-# Projeto de Testes Automatizados de API REST | Postman | JSON Schema | Newman | GitHub Actions :test_tube:
+# Projeto de Testes Funcionais Automatizados de API REST | Postman | Javascript | JSON Schema | Newman | GitHub Actions :test_tube:
 ---
 # :information_source: Introdução 
-Esse projeto "testes-automatizados-api-serve-rest_postman" é executado em um ambiente de desenvolvimento na ["API REST"](https://serverest.dev) do ["ServeRest"](https://github.com/ServeRest) que simula uma loja virtual, com o objetivo de me aprofundar um pouco mais nos estudos sobre validações de testes de API (Ex.: JSON Schema, geração de massa de dados dinâmicos, etc) nas ferramentas Postman, Newman e GitHub Actions.
+Esse projeto "testes-automatizados-api-serve-rest_postman" é executado em um ambiente de produção na ["API REST"](https://serverest.dev) do ["ServeRest"](https://github.com/ServeRest) que simula uma loja virtual, com o objetivo de praticar ainda mais validações de testes de API (Ex.: JSON Schema, geração de massa de dados dinâmicos, etc) em Postman, Javascript, Newman e GitHub Actions.
 
 ---
-# :dart: Executar testes automatizados de API da collection e environment do Postman, Gerar e armazenar relatório html no GitHub Actions 
+# :dart: Executar com Newman testes automatizados de API REST da collection e environment do Postman, Gerar e armazenar report html no GitHub Actions 
 - Nesse repositório, acessar a aba "Actions"
-- Na seção "Actions", clicar em "Pipeline Testes Automatizados API ServeRest Postman"
-- Em "This workflow has a workflow_dispatch event trigger.", clicar em "Run workflow" > "Run workflow" para executar testes automatizados de API da collection e environment do Postman com um tempo de espera de 2 ms entre as requisições, gerar e armazenar relatório html no GitHub Actions
-- Após o término da execução, clicar na run "Pipeline Testes Automatizados API ServeRest Postman"
-- Na seção "Artifacts", clicar em "relatorio-api-serve-rest-postman"
-- Na janela aberta, escolher um diretório para baixar a pasta compactada "relatorio-api-serve-rest-postman.zip"
+- Na seção "Actions", clicar em "Pipeline Testes Automatizados API ServeRest Postman Newman"
+- Em "This workflow has a workflow_dispatch event trigger.", clicar em "Run workflow" > "Run workflow" para executar com Newman testes automatizados de API REST da collection e environment do Postman com um tempo de espera de 2 ms entre as requisições, gerar e armazenar report html no GitHub Actions
+- Após o término da execução, clicar na run "Pipeline Testes Automatizados API ServeRest Postman Newman"
+- Na seção "Artifacts", clicar em "postman-api-serve-rest-report-html-newman"
+- Na janela aberta, escolher um diretório para baixar a pasta compactada "postman-api-serve-rest-report-html-newman.zip"
 
-# Verificar no navegador padrão o relatório html gerado e armazenado anteriormente no GitHub Actions e descompactado no computador :female_detective: 
+# :mag_right: Verificar no navegador padrão o report html gerado e armazenado anteriormente no GitHub Actions e descompactado no computador 
 - Abrir uma janela do "Windows Explorer"
-- Acessar o diretório onde foi baixada a pasta compactada "relatorio-api-serve-rest-postman.zip" anteriormente
+- Acessar o diretório onde foi baixada a pasta compactada "postman-api-serve-rest-report-html-newman.zip" anteriormente
 - Descompactar a pasta
-- Acessar a pasta descompactada "relatorio-api-serve-rest-postman"
-- Clicar 2 vezes sob o relatório "relatorio-api-serve-rest-postman.html" gerado e armazenado anteriormente no GitHub Actions e descompactado para ser aberto e verificado no navegador padrão no computador
+- Acessar a pasta descompactada "postman-api-serve-rest-report-html-newman"
+- Clicar 2 vezes sob o report "postman-api-serve-rest-report-htmlextra-newman.html" gerado e armazenado anteriormente no GitHub Actions e descompactado para ser aberto e verificado no navegador padrão no computador
 
-  
+---
 # Antes de clonar ou executar esse projeto localmente no computador, é necessário seguir as instruções abaixo :point_down:
-
-## :hammer_and_wrench: Janela do "Windows Explorer", criar uma pasta "tools"
+## :hammer_and_wrench: Janela do "Windows Explorer" > aba "Exibir" e marcar algumas opções
 - Abrir uma janela do "Windows Explorer"
-- Acessar o diretório "C:"
-- Criar uma pasta "tools"
+- Clicar na aba "Exibir" 
+- Marcar a opção "Extensões de nomes de arquivos"
+- Marcar a opção "Itens ocultos"
 
-
-## :hammer_and_wrench: Cmder (Console Emulator)
-- Baixar o [Console Emulator (cmder)](https://github.com/cmderdev/cmder/releases/download/v1.3.5/cmder.zip)
-- Clicar com botão direito na pasta compactada > Extrair para "cmder"
-- Mover a pasta descompactada "cmder" para o diretório "C:\tools" criado anteriormente
-- Acessar o diretório "C:\tools\cmder"
-- Clicar com botão direito no executável "cmder.exe" > Enviar para > Área de trabalho (criar atalho)
-- Acessar a Área de Trabalho
-- Clicar 2 vezes no atalho "Cmder - Atalho"
-- Clicar na opção "Unblock and Continue"
-
+## :hammer_and_wrench: Baixar e instalar o git e gitbash; configurar o git
+- Caso ainda não tenha o git e gitbash baixado e instalado, acessar o link do [git e gitbash](https://git-scm.com/download/win), baixar e instalar
+- Caso ainda não tenha configurado o git, seguir os passos apresentados nesse link [Configure a ferramenta](https://training.github.com/downloads/pt_BR/github-git-cheat-sheet/#:~:text=Configure%20a%20ferramenta) e configurar
 
 ## :hammer_and_wrench: Instalar as dependências necessárias 
 ### Desinstalar completamente Node.js e npm que já foram instalados em algum outro momento
@@ -46,12 +38,12 @@ Esse projeto "testes-automatizados-api-serve-rest_postman" é executado em um am
   
 ### Node versão 18.12.1
 - Baixar e instalar o [node v18.12.1](https://nodejs.org/dist/v18.12.1/) > node-v18.12.1-x64.msi
-- Abrir um novo cmder ou outro terminal de preferência
+- Abrir um novo gitbash ou outro terminal de preferência
 - Informar o comando abaixo para confirmar se o node realmente foi instalado
 ```
 node --version
 ```
-- Verificar se foi retornada a mesma versão do node instalada anteriormente
+- Verificar se foi retornada a mesma versão do node instalada anteriormente:
 ```
 v18.12.1
 ```
@@ -65,7 +57,7 @@ npm --version
 ```
 
 ### newman
-- No cmder ou terminal aberto anteriormente, informar o comando abaixo para instalar o newman
+- No gitbash ou terminal aberto anteriormente, informar o comando abaixo para instalar o newman
 ```
 npm install -g newman
 ```
@@ -75,7 +67,7 @@ newman --version
 ```
 
 ### newman-reporter-htmlextra
-- No cmder ou terminal aberto anteriormente, informar o comando abaixo para instalar o newman-reporter-htmlextra
+- No gitbash ou terminal aberto anteriormente, informar o comando abaixo para instalar o newman-reporter-htmlextra
 ```
 npm install -g newman-reporter-htmlextra
 ```
@@ -83,18 +75,14 @@ npm install -g newman-reporter-htmlextra
 ```
 newman-reporter-htmlextra --version
 ```
-- Fechar esse cmder ou terminal
+- Fechar esse gitbash ou terminal
 
-### Baixar, instalar e configurar o git
-- Caso ainda não tenha o git baixado e instalado, acessar o site do [git](https://git-scm.com/download/win), baixar e instalar
-- Caso ainda não tenha configurado o git, seguir os passos apresentados nesse link [Configure a ferramenta](https://training.github.com/downloads/pt_BR/github-git-cheat-sheet/#:~:text=Configure%20a%20ferramenta) e configurar
-
-
-## :hammer_and_wrench: Clonar o projeto
+---
+# :hammer_and_wrench: Clonar o projeto
 - Abrir uma janela do "Windows Explorer"
 - Acessar o diretório onde será clonado o projeto "testes-automatizados-api-serve-rest_postman"
 - Copiar esse diretório 
-- Abrir um novo cmder 
+- Abrir um novo gitbash 
 - Informar o comando abaixo para acessar onde será clonado o projeto
 ```
 cd "<diretório copiado anteriormente>"
@@ -112,9 +100,9 @@ git clone https://github.com/AndressaKarla/testes-automatizados-api-serve-rest_p
 git clone git@github.com:AndressaKarla/testes-automatizados-api-serve-rest_postman.git
 ```
 
-
-# :dart: Executar testes automatizados de API da collection e environment do Postman e Gerar relatório diretamente no terminal no computador
-- No cmder aberto anteriormente, informar o comando abaixo para acessar o projeto “testes-automatizados-api-serve-rest_postman”
+---
+# :dart: Executar com Newman testes automatizados de API REST da collection e environment do Postman e Gerar report diretamente no terminal no computador
+- Informar o comando abaixo para acessar o projeto “testes-automatizados-api-serve-rest_postman” clonado anteriormente
 ```
 cd testes-automatizados-api-serve-rest_postman
 ```
@@ -122,41 +110,60 @@ Ex.:
 ```
 C:\PROJETOS\Automação\Postman\testes-automatizados-api-serve-rest_postman
 ```
-- Informar o comando abaixo para executar testes automatizados de API da collection e environment do Postman com um tempo de espera de 2 ms entre as requisições e Gerar relatório diretamente no terminal
+- Informar o comando abaixo para executar com Newman testes automatizados de API REST da collection e environment do Postman com um tempo de espera de 2 ms entre as requisições e Gerar report diretamente no terminal
 ```
 newman run ./nome-collection.json -e ./nome-environment.json --delay-request 2
 ```
 Ex.: 
 ```
-newman run ./api-serve-rest_collection.json -e ./api-serve-rest_dev-environment.json --delay-request 2
+newman run ./api-serve-rest_collection.json -e ./api-serve-rest_prod-environment.json --delay-request 2
 ```
 
-# :dart: Executar testes automatizados de API da collection e environment do Postman e Gerar relatório html na pasta "relatorios" no computador
-- No cmder aberto anteriormente, informar o comando abaixo para executar testes automatizados de API da collection e environment do Postman com um tempo de espera de 2 ms entre as requisições e Gerar relatório html na pasta "relatorios" no computador (mesmo comando que é utilizado no "Passo 4" da "Pipeline Testes Automatizados API ServeRest Postman" em ".github > workflows > [workflow-testes-automatizados-api-serve-rest-postman.yml](https://github.com/AndressaKarla/testes-automatizados-api-serve-rest_postman/blob/main/.github/workflows/workflow-testes-automatizados-api-serve-rest-postman.yml)" no GitHub Actions)
+# :dart: Executar com Newman testes automatizados de API REST da collection e environment do Postman e Gerar report html na pasta "reports" no computador
+- No gitbash aberto anteriormente, informar o comando abaixo para executar com Newman testes automatizados de API REST da collection e environment do Postman com um tempo de espera de 2 ms entre as requisições e Gerar report html na pasta "reports" no computador (mesmo comando que é utilizado no "Passo 4" da "Pipeline Testes Automatizados API ServeRest Postman Newman" em ".github > workflows > [workflow-testes-automatizados-api-serve-rest-postman-newman.yml](https://github.com/AndressaKarla/testes-automatizados-api-serve-rest_postman/blob/main/.github/workflows/workflow-testes-automatizados-api-serve-rest-postman-newman.yml)" no GitHub Actions)
 ```
-newman run ./nome-collection.json -e ./nome-environment.json --delay-request 2 --reporters cli, -r htmlextra --reporter-htmlextra-export ./relatorios/nome-relatorio.html
+newman run ./nome-collection.json -e ./nome-environment.json --delay-request 2 --reporters cli, -r htmlextra --reporter-htmlextra-export ./reports/nome-report.html
 ```
 Ex.: 
 ```
-newman run ./api-serve-rest_collection.json -e ./api-serve-rest_dev-environment.json --delay-request 2 --reporters cli, -r htmlextra --reporter-htmlextra-export ./relatorios/relatorio-api-serve-rest-postman.html
+newman run ./api-serve-rest_collection.json -e ./api-serve-rest_prod-environment.json --delay-request 2 --reporters cli, -r htmlextra --reporter-htmlextra-export ./reports/postman-api-serve-rest-report-htmlextra-newman.html
 ```
-- Fechar esse cmder
 
 ---
-# Verificar no navegador padrão o relatório html gerado na pasta "relatorios" anteriormente no computador :female_detective:
-- Abrir uma janela do "Windows Explorer"
-- Acessar o diretório onde foi clonado o projeto “testes-automatizados-api-serve-rest_postman”
-
-Ex.: 
+# :hammer_and_wrench: Instalar as extensões no Visual Studio Code (VS Code)
+- Caso ainda não tenha o VS Code baixado e instalado, acessar o site do [Visual Studio Code](https://code.visualstudio.com/download), baixar e instalar com a opção "System Installer"
+- Com o Visual Studio Code aberto, caso seja apresentado alguma mensagem de "Instalar pacote de idiomas ...", clicar no ícone de configurações > "Don't Show Again"
+- Clicar na opção "Manage > Profiles > Create Profile"
+- Em "Profile name", informar "Postman"
+- Clicar na opção "Create"
+- Clicar na opção "Extensions", informar e instalar as extensões abaixo:
+  - Hyper Term Theme
+	- HasseNasse
+   		- Clicar na opção "Hyper Term Black" apresentada para habilitar a extensão
+  - Material Icon Theme
+  	- Philipp Kief
+		- Clicar na opção "Material Icon Theme" apresentada para habilitar a extensão 
+- Fechar o VS Code
+    
+## :bookmark_tabs: Abrir o VS Code diretamente na pasta do projeto "testes-automatizados-api-serve-rest_postman"
+- No gitbash aberto anteriormente, informar o comando abaixo para abrir o VS Code diretamente na pasta do projeto "testes-automatizados-api-serve-rest_postman"
 ```
-C:\PROJETOS\Automação\Postman\testes-automatizados-api-serve-rest_postman
+code .
 ```
-- Acessar a pasta "relatorios" 
-- Clicar 2 vezes sob o relatório "relatorio-api-serve-rest-postman.html" gerado anteriormente no computador para ser aberto e verificado no navegador padrão
+- Aguardar o VS Code ser aberto
+- No VS Code aberto, caso seja apresentado "Do you trust the authors on the files in this folder?", marcar a opção "Trust the authors of all files in the parent folder ...."
+	- Clicar no botão "Yes, I trust the authors ...."
+   
+---
+# :mag_right: Verificar no navegador padrão o report html gerado e armazenado na pasta "reports" anteriormente no computador 
+## :bookmark_tabs: Report html no computador
+- No VS Code aberto anteriormente, acessar "reports > postman-api-serve-rest-report-htmlextra-newman.html" 
+- Clicar com botão direito do mouse sob o arquivo "postman-api-serve-rest-report-htmlextra-newman.html" > "Reveal in File Explorer" 
+- Na janela do "Windows Explorer" aberta automaticamente, clicar 2 vezes sob o arquivo "postman-api-serve-rest-report-htmlextra-newman.html" gerado e armazenado anteriormente no computador para ser aberto e verificado no navegador padrão
 
 ---
 ### Feito com ❤️ por Andressa Karla :wave: 
 
-### [![Medium](https://img.shields.io/badge/-Medium-595D60?style=plastic&logo=Medium&logoColor=white&link=https://medium.com/@andressakarla)](https://medium.com/@andressakarla) [![Linkedin](https://img.shields.io/badge/-LinkedIn-595D60?style=plastic&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/andressakarla//)](https://www.linkedin.com/in/andressakarla/)
+### [![Medium](https://img.shields.io/badge/-Medium-595D60?style=plastic&logo=Medium&logoColor=white&link=https://medium.com/@andressakarla)](https://medium.com/@andressakarla) [![Linkedin](https://img.shields.io/badge/-LinkedIn-595D60?style=plastic&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/andressakarla/)](https://www.linkedin.com/in/andressakarla/)
 
 ---

@@ -1,4 +1,4 @@
-name: Pipeline Testes Automatizados API ServeRest Postman
+name: Pipeline Testes Automatizados API ServeRest Postman Newman
 # executa o workflow toda vez que for realizado um push ou pull-request no repositório
 on:
   push:
@@ -10,8 +10,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  testes-automatizados-api-serve-rest-postman:
-    # agente de execução/runner do tipo máquina virtual bem enxuta, sem interface gráfica
+  postman-newman-api-serve-rest:
+    # agente de execução/runner 
     runs-on: ubuntu-latest
 
     steps:
@@ -26,15 +26,15 @@ jobs:
       - name: Passo 3 - Instalar newman-reporter-htmlextra
         run: sudo npm install -g newman-reporter-htmlextra
         
-      - name: Passo 4 - Executar testes automatizados de API da collection e environment do Postman e Gerar relatório html 
-        run: newman run ./api-serve-rest_collection.json -e ./api-serve-rest_dev-environment.json --delay-request 2 --reporters cli, -r htmlextra --reporter-htmlextra-export ./relatorios/relatorio-api-serve-rest-postman.html
+      - name: Passo 4 - Executar com Newman testes automatizados de API REST em um ambiente de produção do "ServeRest" da collection e environment do Postman e Gerar report html 
+        run: newman run ./api-serve-rest_collection.json -e ./api-serve-rest_prod-environment.json --delay-request 2 --reporters cli, -r htmlextra --reporter-htmlextra-export ./reports/postman-api-serve-rest-report-htmlextra-newman.html
    
-      - name: Passo 5 - Armazenar relatório html
-        uses: actions/upload-artifact@v3
+      - name: Passo 5 - Armazenar report html
         # expressão condicional para que sempre seja executado independentemente dos resultados dos steps anteriores
-        if: ${{ always() }}
+        if: ${{ always() }}      
+        uses: actions/upload-artifact@v3
         with: 
-            name: relatorio-api-serve-rest-postman
-            path: ./relatorios/relatorio-api-serve-rest-postman.html
-            # armazena o relatório html por 30 dias
+            name: postman-api-serve-rest-report-html-newman
+            path: ./reports
+            # armazena o report html por 30 dias
             retention-days: 30
