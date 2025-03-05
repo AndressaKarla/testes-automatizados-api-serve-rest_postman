@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "450d52e9-c18b-420d-a11c-4fa139f52d69",
+		"_postman_id": "fde05bce-3863-4f99-9cef-315320850d8e",
 		"name": "api-serve-rest_collection",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "25329779"
 	},
 	"item": [
@@ -19,11 +19,11 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"function gerarNumerosAleatorios(qtdeNumeros) {\r",
+											"function gerarNumerosAleatorios(qtdeDigitos) {\r",
 											"  var text = \"\";\r",
 											"  var possible = \"0123456789\";\r",
 											"\r",
-											"  for (var i = 0; i < qtdeNumeros; i++)\r",
+											"  for (var i = 0; i < qtdeDigitos; i++)\r",
 											"    text += possible.charAt(Math.floor(Math.random() * possible.length));\r",
 											"\r",
 											"  return text;\r",
@@ -34,7 +34,8 @@
 											"\r",
 											""
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								},
 								{
@@ -59,12 +60,13 @@
 											"    pm.response.to.have.status(\"Created\");\r",
 											"\r",
 											"    pm.expect(messageObtida).to.include(messageEsperada);\r",
-											"    pm.expect(idObtido).is.not.null;\r",
+											"    pm.expect(idObtido).to.exist;\r",
 											"});\r",
 											"\r",
 											"pm.environment.set(\"idAdministrador\", idObtido);"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								}
 							],
@@ -97,15 +99,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{baseUri}}/usuarios",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"usuarios"
-									]
-								}
+								"url": "{{baseUri}}/usuarios"
 							},
 							"response": []
 						},
@@ -116,11 +110,11 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"function gerarNumerosAleatorios(qtdeNumeros) {\r",
+											"function gerarNumerosAleatorios(qtdeDigitos) {\r",
 											"  var text = \"\";\r",
 											"  var possible = \"0123456789\";\r",
 											"\r",
-											"  for (var i = 0; i < qtdeNumeros; i++)\r",
+											"  for (var i = 0; i < qtdeDigitos; i++)\r",
 											"    text += possible.charAt(Math.floor(Math.random() * possible.length));\r",
 											"\r",
 											"  return text;\r",
@@ -129,7 +123,8 @@
 											"var email = \"usuario.padrao1.\" + gerarNumerosAleatorios(4) + \"@outlook.com\";\r",
 											"pm.environment.set(\"email2\", email);"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								},
 								{
@@ -154,12 +149,13 @@
 											"    pm.response.to.have.status(\"Created\");\r",
 											"\r",
 											"    pm.expect(messageObtida).to.include(messageEsperada);\r",
-											"    pm.expect(idObtido).is.not.null;\r",
+											"    pm.expect(idObtido).to.exist;\r",
 											"});\r",
 											"\r",
 											"pm.environment.set(\"idPadrao1\", idObtido);"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								}
 							],
@@ -192,15 +188,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{baseUri}}/usuarios",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"usuarios"
-									]
-								}
+								"url": "{{baseUri}}/usuarios"
 							},
 							"response": []
 						},
@@ -478,15 +466,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{baseUri}}/usuarios",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"usuarios"
-									]
-								}
+								"url": "{{baseUri}}/usuarios"
 							},
 							"response": []
 						}
@@ -554,15 +534,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{baseUri}}/login",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"login"
-									]
-								}
+								"url": "{{baseUri}}/login"
 							},
 							"response": []
 						},
@@ -625,15 +597,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{baseUri}}/login",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"login"
-									]
-								}
+								"url": "{{baseUri}}/login"
 							},
 							"response": []
 						},
@@ -691,15 +655,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{baseUri}}/login",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"login"
-									]
-								}
+								"url": "{{baseUri}}/login"
 							},
 							"response": []
 						}
@@ -715,11 +671,11 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"function gerarNumerosAleatorios(qtdeNumeros) {",
+											"function gerarNumerosAleatorios(qtdeDigitos) {",
 											"  var text = \"\";",
 											"  var possible = \"0123456789\";",
 											"",
-											"  for (var i = 0; i < qtdeNumeros; i++)",
+											"  for (var i = 0; i < qtdeDigitos; i++)",
 											"    text += possible.charAt(Math.floor(Math.random() * possible.length));",
 											"",
 											"  return text;",
@@ -729,7 +685,8 @@
 											"pm.environment.set(\"preco1\", gerarNumerosAleatorios(3));",
 											""
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								},
 								{
@@ -762,7 +719,8 @@
 											"",
 											"pm.environment.set(\"idProduto1\", idObtido);"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								}
 							],
@@ -803,15 +761,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{baseUri}}/produtos",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"produtos"
-									]
-								}
+								"url": "{{baseUri}}/produtos"
 							},
 							"response": []
 						},
@@ -822,11 +772,11 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"function gerarNumerosAleatorios(qtdeNumeros) {",
+											"function gerarNumerosAleatorios(qtdeDigitos) {",
 											"  var text = \"\";",
 											"  var possible = \"0123456789\";",
 											"",
-											"  for (var i = 0; i < qtdeNumeros; i++)",
+											"  for (var i = 0; i < qtdeDigitos; i++)",
 											"    text += possible.charAt(Math.floor(Math.random() * possible.length));",
 											"",
 											"  return text;",
@@ -835,7 +785,8 @@
 											"pm.environment.set(\"numero2\", gerarNumerosAleatorios(4));",
 											"pm.environment.set(\"preco2\", gerarNumerosAleatorios(3));"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								},
 								{
@@ -868,7 +819,8 @@
 											"",
 											"pm.environment.set(\"idProduto2\", idObtido);"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								}
 							],
@@ -909,15 +861,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{baseUri}}/produtos",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"produtos"
-									]
-								}
+								"url": "{{baseUri}}/produtos"
 							},
 							"response": []
 						},
@@ -953,18 +897,19 @@
 											"    pm.expect(messageObtida).to.include(messageEsperada);",
 											"});"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								},
 								{
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"function gerarNumerosAleatorios(qtdeNumeros) {",
+											"function gerarNumerosAleatorios(qtdeDigitos) {",
 											"  var text = \"\";",
 											"  var possible = \"0123456789\";",
 											"",
-											"  for (var i = 0; i < qtdeNumeros; i++)",
+											"  for (var i = 0; i < qtdeDigitos; i++)",
 											"    text += possible.charAt(Math.floor(Math.random() * possible.length));",
 											"",
 											"  return text;",
@@ -972,7 +917,8 @@
 											"",
 											"pm.environment.set(\"numero3\", gerarNumerosAleatorios(4));"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								}
 							],
@@ -1013,16 +959,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{baseUri}}/produtos/{{idProduto2}}",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"produtos",
-										"{{idProduto2}}"
-									]
-								}
+								"url": "{{baseUri}}/produtos/{{idProduto2}}"
 							},
 							"response": []
 						},
@@ -1033,11 +970,11 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"function gerarNumerosAleatorios(qtdeNumeros) {",
+											"function gerarNumerosAleatorios(qtdeDigitos) {",
 											"  var text = \"\";",
 											"  var possible = \"0123456789\";",
 											"",
-											"  for (var i = 0; i < qtdeNumeros; i++)",
+											"  for (var i = 0; i < qtdeDigitos; i++)",
 											"    text += possible.charAt(Math.floor(Math.random() * possible.length));",
 											"",
 											"  return text;",
@@ -1046,7 +983,8 @@
 											"pm.environment.set(\"numero4\", gerarNumerosAleatorios(4));",
 											"pm.environment.set(\"preco3\", gerarNumerosAleatorios(3));"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								},
 								{
@@ -1079,7 +1017,8 @@
 											"",
 											"pm.environment.set(\"idProduto3\", idObtido);"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								}
 							],
@@ -1120,15 +1059,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{baseUri}}/produtos",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"produtos"
-									]
-								}
+								"url": "{{baseUri}}/produtos"
 							},
 							"response": []
 						},
@@ -1262,16 +1193,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{baseUri}}/produtos/{{idProduto3}}",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"produtos",
-										"{{idProduto3}}"
-									]
-								}
+								"url": "{{baseUri}}/produtos/{{idProduto3}}"
 							},
 							"response": []
 						}
@@ -1354,15 +1276,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{baseUri}}/carrinhos",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"carrinhos"
-									]
-								}
+								"url": "{{baseUri}}/carrinhos"
 							},
 							"response": []
 						},
@@ -1440,15 +1354,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{baseUri}}/carrinhos",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"carrinhos"
-									]
-								}
+								"url": "{{baseUri}}/carrinhos"
 							},
 							"response": []
 						},
@@ -1509,15 +1415,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{baseUri}}/carrinhos",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"carrinhos"
-									]
-								}
+								"url": "{{baseUri}}/carrinhos"
 							},
 							"response": []
 						}
@@ -1538,11 +1436,11 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"function gerarNumerosAleatorios(qtdeNumeros) {",
+											"function gerarNumerosAleatorios(qtdeDigitos) {",
 											"  var text = \"\";",
 											"  var possible = \"0123456789\";",
 											"",
-											"  for (var i = 0; i < qtdeNumeros; i++)",
+											"  for (var i = 0; i < qtdeDigitos; i++)",
 											"    text += possible.charAt(Math.floor(Math.random() * possible.length));",
 											"",
 											"  return text;",
@@ -1550,7 +1448,8 @@
 											"",
 											"pm.environment.set(\"numero5\", gerarNumerosAleatorios(4));"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								},
 								{
@@ -1582,7 +1481,8 @@
 											"    pm.expect(messageObtida).to.include(messageEsperada);",
 											"});"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								}
 							],
@@ -1623,15 +1523,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{baseUri}}/produtos",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"produtos"
-									]
-								}
+								"url": "{{baseUri}}/produtos"
 							},
 							"response": []
 						},
@@ -1642,11 +1534,11 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"function gerarNumerosAleatorios(qtdeNumeros) {",
+											"function gerarNumerosAleatorios(qtdeDigitos) {",
 											"  var text = \"\";",
 											"  var possible = \"0123456789\";",
 											"",
-											"  for (var i = 0; i < qtdeNumeros; i++)",
+											"  for (var i = 0; i < qtdeDigitos; i++)",
 											"    text += possible.charAt(Math.floor(Math.random() * possible.length));",
 											"",
 											"  return text;",
@@ -1654,7 +1546,8 @@
 											"",
 											"pm.environment.set(\"numero6\", gerarNumerosAleatorios(4));"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								},
 								{
@@ -1686,7 +1579,8 @@
 											"    pm.expect(messageObtida).to.include(messageEsperada);",
 											"});"
 										],
-										"type": "text/javascript"
+										"type": "text/javascript",
+										"packages": {}
 									}
 								}
 							],
@@ -1727,16 +1621,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{baseUri}}/produtos/{{idProduto3}}",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"produtos",
-										"{{idProduto3}}"
-									]
-								}
+								"url": "{{baseUri}}/produtos/{{idProduto3}}"
 							},
 							"response": []
 						}
@@ -1804,16 +1689,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{baseUri}}/carrinhos/f9f9f9f9f9f9f9f9",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"carrinhos",
-										"f9f9f9f9f9f9f9f9"
-									]
-								}
+								"url": "{{baseUri}}/carrinhos/f9f9f9f9f9f9f9f9"
 							},
 							"response": []
 						},
@@ -1877,16 +1753,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{baseUri}}/carrinhos/concluir-compra",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"carrinhos",
-										"concluir-compra"
-									]
-								}
+								"url": "{{baseUri}}/carrinhos/concluir-compra"
 							},
 							"response": []
 						},
@@ -1944,16 +1811,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{baseUri}}/carrinhos/cancelar-compra",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"carrinhos",
-										"cancelar-compra"
-									]
-								}
+								"url": "{{baseUri}}/carrinhos/cancelar-compra"
 							},
 							"response": []
 						}
@@ -2027,16 +1885,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{baseUri}}/carrinhos/concluir-compra",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"carrinhos",
-										"concluir-compra"
-									]
-								}
+								"url": "{{baseUri}}/carrinhos/concluir-compra"
 							},
 							"response": []
 						},
@@ -2099,16 +1948,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{baseUri}}/carrinhos/cancelar-compra",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"carrinhos",
-										"cancelar-compra"
-									]
-								}
+								"url": "{{baseUri}}/carrinhos/cancelar-compra"
 							},
 							"response": []
 						}
@@ -2167,16 +2007,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{baseUri}}/produtos/{{idProduto1}}",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"produtos",
-										"{{idProduto1}}"
-									]
-								}
+								"url": "{{baseUri}}/produtos/{{idProduto1}}"
 							},
 							"response": []
 						},
@@ -2230,16 +2061,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{baseUri}}/produtos/{{idProduto2}}",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"produtos",
-										"{{idProduto2}}"
-									]
-								}
+								"url": "{{baseUri}}/produtos/{{idProduto2}}"
 							},
 							"response": []
 						},
@@ -2293,16 +2115,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{baseUri}}/produtos/{{idProduto3}}",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"produtos",
-										"{{idProduto3}}"
-									]
-								}
+								"url": "{{baseUri}}/produtos/{{idProduto3}}"
 							},
 							"response": []
 						}
@@ -2353,16 +2166,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{baseUri}}/usuarios/{{idPadrao2}}",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"usuarios",
-										"{{idPadrao2}}"
-									]
-								}
+								"url": "{{baseUri}}/usuarios/{{idPadrao2}}"
 							},
 							"response": []
 						},
@@ -2408,16 +2212,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{baseUri}}/usuarios/{{idPadrao1}}",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"usuarios",
-										"{{idPadrao1}}"
-									]
-								}
+								"url": "{{baseUri}}/usuarios/{{idPadrao1}}"
 							},
 							"response": []
 						},
@@ -2463,16 +2258,7 @@
 										"type": "text"
 									}
 								],
-								"url": {
-									"raw": "{{baseUri}}/usuarios/{{idAdministrador}}",
-									"host": [
-										"{{baseUri}}"
-									],
-									"path": [
-										"usuarios",
-										"{{idAdministrador}}"
-									]
-								}
+								"url": "{{baseUri}}/usuarios/{{idAdministrador}}"
 							},
 							"response": []
 						}
