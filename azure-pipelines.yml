@@ -23,16 +23,16 @@ steps:
   displayName: 'Executar com Newman testes automatizados de API REST em um ambiente de produção do "ServeRest" da collection e environment do Postman e Gerar reports html e xml'
   continueOnError: true
 
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: './reports/postman-api-serve-rest-report-junit-xml-newman.xml'
-    testRunTitle: 'Publicar os resultados dos testes e Armazenar em report xml'
-  displayName: 'Publicar os resultados dos testes e Armazenar em report xml'
-
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: './reports'
     ArtifactName: 'postman-api-serve-rest-reports-html-xml-newman'
     publishLocation: 'Container'
   displayName: 'Armazenar os resultados dos testes em reports html e xml'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: './reports/postman-api-serve-rest-report-junit-xml-newman.xml'
+    testRunTitle: 'Publicar os resultados dos testes e Armazenar em report xml'
+  displayName: 'Publicar os resultados dos testes e Armazenar em report xml'
