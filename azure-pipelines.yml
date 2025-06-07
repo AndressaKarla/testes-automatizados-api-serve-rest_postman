@@ -19,7 +19,7 @@ steps:
   displayName: 'Instalar newman-reporter-htmlextra'
   
 - script: |
-    newman run ./api-serve-rest_collection.json -e ./api-serve-rest_prod-environment.json --delay-request 2 --reporters cli, -r htmlextra --reporter-htmlextra-export ./reports/postman-api-serve-rest-report-htmlextra-newman.html -r junit --reporter-junit-export ./reports/postman-api-serve-rest-report-junit-xml-newman.xml
+    newman run ./api-serve-rest_collection.json -e ./api-serve-rest_prod-environment.json --delay-request 2 --reporters cli,htmlextra,junit --reporter-htmlextra-export ./reports/postman-api-serve-rest-report-htmlextra-newman.html --reporter-junit-export ./reports/postman-api-serve-rest-report-junit-xml-newman.xml
   displayName: 'Executar com Newman testes automatizados de API REST em um ambiente de produção do "ServeRest" da collection e environment do Postman e Gerar reports html e xml'
   continueOnError: true
 
@@ -34,5 +34,5 @@ steps:
   inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: './reports/postman-api-serve-rest-report-junit-xml-newman.xml'
-    testRunTitle: 'Publicar os resultados dos testes e Armazenar em report xml'
-  displayName: 'Publicar os resultados dos testes e Armazenar em report xml'
+    testRunTitle: 'Publicar os resultados dos testes'
+  displayName: 'Publicar os resultados dos testes'
