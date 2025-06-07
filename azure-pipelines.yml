@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: ubuntu-22.04
 
 steps:
 - task: NodeTool@0
@@ -27,4 +27,12 @@ steps:
   inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: './reports/postman-api-serve-rest-report-junit-xml-newman.xml'
-    testRunTitle: 'Armazenar report xml'
+    testRunTitle: 'Publicar os resultados dos testes e Armazenar em report xml'
+  displayName: 'Publicar os resultados dos testes e Armazenar em report xml'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: './reports/postman-api-serve-rest-report-htmlextra-newman.html'
+    ArtifactName: 'reports'
+    publishLocation: 'Container'
+  displayName: 'Armazenar os resultados dos testes em report html'
