@@ -32,7 +32,7 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: './reports/postman-api-serve-rest-report-htmlextra-newman.html'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/reports/postman-api-serve-rest-report-htmlextra-newman.html'
     ArtifactName: 'reports'
     publishLocation: 'Container'
   displayName: 'Armazenar os resultados dos testes em report html'
