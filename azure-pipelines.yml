@@ -1,0 +1,38 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-22.04
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x'
+  displayName: 'Instalar node versão 18'
+
+- script: |
+    npm install -g newman
+  displayName: 'Instalar newman'
+  
+- script: |
+    npm install -g newman-reporter-htmlextra
+  displayName: 'Instalar newman-reporter-htmlextra'
+  
+- script: |
+    newman run ./api-serve-rest_collection.json -e ./api-serve-rest_prod-environment.json --delay-request 2 --reporters cli,htmlextra,junit --reporter-htmlextra-export ./reports/postman-api-serve-rest-report-htmlextra-newman.html --reporter-junit-export ./reports/postman-api-serve-rest-report-junit-xml-newman.xml
+  displayName: 'Executar com Newman testes automatizados de API REST em um ambiente de produção do "ServeRest" da collection e environment do Postman e Gerar reports html e xml'
+  continueOnError: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: './reports'
+    ArtifactName: 'postman-api-serve-rest-reports-html-xml-newman'
+    publishLocation: 'Container'
+  displayName: 'Armazenar os resultados dos testes em reports html e xml'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: './reports/postman-api-serve-rest-report-junit-xml-newman.xml'
+    testRunTitle: 'Publicar os resultados dos testes'
+  displayName: 'Publicar os resultados dos testes'
