@@ -1,5 +1,6 @@
 name: Pipeline Testes Automatizados API ServeRest Postman Newman
-# executa o workflow toda vez que for realizado um push ou pull-request no repositório
+
+# executa o workflow toda vez que for realizado um push ou pull-request na branch principal (main) no repositório
 on:
   push:
     branches: [ "main" ]
@@ -15,13 +16,12 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
+      contents: write
       pages: write
       id-token: write
-
-    environment:
-      name: github-pages
-      url: https://andressakarla.github.io/testes-automatizados-api-serve-rest_postman/postman-api-serve-rest-report-htmlextra-newman.html    
+  
+    # envionment com "name: github-pages" e "url: https://andressakarla.github.io/testes-automatizados-api-serve-rest_postman/postman-api-serve-rest-report-htmlextra-newman.html" para deploy/publicar no github pages, configurado automaticamente e aplicado apenas na branch principal (main)
+    environment: ${{ github.ref == 'refs/heads/main' && 'github-pages' || '' }}  
 
     steps:
       - name: Passo 1 - Obter cópia do código-fonte do repositório
@@ -32,41 +32,41 @@ jobs:
           node --version
           newman --version
           
-      - name: Passo 3 - Instalar newman-reporter-htmlextra
+      - name: Passo 3 - Instalar newman-reporter-htmlextra globalmente
         run: sudo npm install -g newman-reporter-htmlextra
         
-      - name: Passo 4 - Executar com Newman testes automatizados de API REST em um ambiente de produção do "ServeRest" da collection e environment do Postman e Gerar report html 
-        run: newman run ./api-serve-rest_collection.json -e ./api-serve-rest_prod-environment.json --delay-request 2 --reporters cli, -r htmlextra --reporter-htmlextra-export ./reports/postman-api-serve-rest-report-htmlextra-newman.html
+      - name: Passo 4 - Executar com Newman testes automatizados de API REST da collection e environment do Postman em um ambiente de produção e Gerar os resultados dos testes
+        run: newman run ./api-serve-rest_collection.json -e ./api-serve-rest_prod-environment.json --delay-request 2 --reporters cli,htmlextra,junit --reporter-htmlextra-export ./reports/postman-api-serve-rest-report-htmlextra-newman.html --reporter-junit-export ./reports/postman-api-serve-rest-report-junit-xml-newman.xml
    
-      - name: Passo 5 - Armazenar report html
+      - name: Passo 5 - Armazenar os resultados dos testes em reports html e xml
         # expressão condicional para que sempre seja executado independentemente dos resultados dos steps anteriores
         if: ${{ always() }}      
         uses: actions/upload-artifact@v4
         with: 
-            name: postman-api-serve-rest-report-html-newman
+            name: postman-reports-html-junit-xml-newman
             path: ./reports
-            # armazena o report html por 30 dias
+            # armazena por 30 dias
             retention-days: 30
 
-      - name: Passo 6 - Configurar pages
-        if: ${{ always() }}
+      - name: Passo 6 - Configurar pages apenas na branch principal (main)
+        if: github.ref == 'refs/heads/main'
         uses: actions/configure-pages@v4
 
-      - name: Passo 7 - Baixar report html armazenado no "Passo 5 - Armazenar report html"
-        if: ${{ always() }}
+      - name: Passo 7 - Baixar report html armazenado no "Passo 5 - Armazenar os resultados dos testes em reports html e xml" apenas na branch principal (main)
+        if: github.ref == 'refs/heads/main'
         uses: actions/download-artifact@v4
         with: 
-          name: postman-api-serve-rest-report-html-newman
+          name: postman-reports-html-junit-xml-newman
           path: ./reports
 
-      - name: Passo 8 - Armazenar pages
-        if: ${{ always() }}
+      - name: Passo 8 - Armazenar pages apenas na branch principal (main)
+        if: github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./reports
           retention-days: 30
 
-      - name: Passo 9 - Deploy/Publicar no Github Pages na "url" configurada em "postman-newman-api-serve-rest > environment"
-        if: ${{ always() }}
+      - name: Passo 9 - Deploy/Publicar no Github Pages na "url" configurada automaticamente em "postman-newman-api-serve-rest > environment" apenas na branch principal (main)
+        if: github.ref == 'refs/heads/main'
         id: deployment
         uses: actions/deploy-pages@v4
