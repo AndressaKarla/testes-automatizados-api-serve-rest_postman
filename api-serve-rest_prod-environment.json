@@ -1,5 +1,5 @@
 {
-	"id": "0cb48c2b-4cc1-4d51-a8a7-728c18344c77",
+	"id": "35e6302c-5312-4fee-b92d-d3c41e2ff8f8",
 	"name": "api-serve-rest_prod-environment",
 	"values": [
 		{
@@ -99,13 +99,13 @@
 			"enabled": true
 		},
 		{
-			"key": "numero1",
+			"key": "preco1",
 			"value": "",
 			"type": "any",
 			"enabled": true
 		},
 		{
-			"key": "preco1",
+			"key": "dataHora1",
 			"value": "",
 			"type": "any",
 			"enabled": true
@@ -135,13 +135,13 @@
 			"enabled": true
 		},
 		{
-			"key": "numero2",
+			"key": "preco2",
 			"value": "",
 			"type": "any",
 			"enabled": true
 		},
 		{
-			"key": "preco2",
+			"key": "dataHora2",
 			"value": "",
 			"type": "any",
 			"enabled": true
@@ -171,7 +171,7 @@
 			"enabled": true
 		},
 		{
-			"key": "numero3",
+			"key": "dataHora3",
 			"value": "",
 			"type": "any",
 			"enabled": true
@@ -201,13 +201,13 @@
 			"enabled": true
 		},
 		{
-			"key": "numero4",
+			"key": "preco3",
 			"value": "",
 			"type": "any",
 			"enabled": true
 		},
 		{
-			"key": "preco3",
+			"key": "dataHora4",
 			"value": "",
 			"type": "any",
 			"enabled": true
@@ -255,7 +255,7 @@
 			"enabled": true
 		},
 		{
-			"key": "numero5",
+			"key": "dataHora5",
 			"value": "",
 			"type": "any",
 			"enabled": true
@@ -285,7 +285,7 @@
 			"enabled": true
 		},
 		{
-			"key": "numero6",
+			"key": "dataHora6",
 			"value": "",
 			"type": "any",
 			"enabled": true
@@ -315,7 +315,8 @@
 			"enabled": true
 		}
 	],
+	"color": null,
 	"_postman_variable_scope": "environment",
-	"_postman_exported_at": "2025-03-05T02:31:03.446Z",
-	"_postman_exported_using": "Postman/11.35.0"
+	"_postman_exported_at": "2026-02-23T19:01:02.800Z",
+	"_postman_exported_using": "Postman/11.85.1-260219-0947"
 }

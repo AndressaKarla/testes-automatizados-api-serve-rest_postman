@@ -1,2290 +1,2598 @@
 {
-	"info": {
-		"_postman_id": "fde05bce-3863-4f99-9cef-315320850d8e",
-		"name": "api-serve-rest_collection",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "25329779"
-	},
-	"item": [
-		{
-			"name": "campos informados corretamente",
-			"item": [
-				{
-					"name": "Usuários",
-					"item": [
-						{
-							"name": "POST usuario (administrador)",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"function gerarNumerosAleatorios(qtdeDigitos) {\r",
-											"  var text = \"\";\r",
-											"  var possible = \"0123456789\";\r",
-											"\r",
-											"  for (var i = 0; i < qtdeDigitos; i++)\r",
-											"    text += possible.charAt(Math.floor(Math.random() * possible.length));\r",
-											"\r",
-											"  return text;\r",
-											"}\r",
-											"\r",
-											"var email = \"usuario.admin.\" + gerarNumerosAleatorios(4) + \"@gmail.com\";\r",
-											"pm.environment.set(\"email1\", email);\r",
-											"\r",
-											""
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonDataRequest = JSON.parse(pm.request.body.raw); \r",
-											"var nome = jsonDataRequest.nome;\r",
-											"pm.environment.set(\"nome1\", nome);\r",
-											"\r",
-											"var password = jsonDataRequest.password;\r",
-											"pm.environment.set(\"password1\", password);\r",
-											"\r",
-											"var jsonData = pm.response.json();\r",
-											"var messageObtida = jsonData.message;\r",
-											"var idObtido = jsonData._id;\r",
-											"\r",
-											"var messageEsperada = \"Cadastro realizado com sucesso\";\r",
-											"\r",
-											"pm.test(\"POST usuario (administrador) - Validar status 201 Created e dados retornados com sucesso\", function () {\r",
-											"    pm.response.to.have.status(201);\r",
-											"    pm.response.to.have.status(\"Created\");\r",
-											"\r",
-											"    pm.expect(messageObtida).to.include(messageEsperada);\r",
-											"    pm.expect(idObtido).to.exist;\r",
-											"});\r",
-											"\r",
-											"pm.environment.set(\"idAdministrador\", idObtido);"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true,
-									"accept": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nome\": \"Usuário Admin\",\r\n    \"email\": \"{{email1}}\",\r\n    \"password\": \"teste1234\",\r\n    \"administrador\": \"true\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{baseUri}}/usuarios"
-							},
-							"response": []
-						},
-						{
-							"name": "POST usuario (padrão 1)",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"function gerarNumerosAleatorios(qtdeDigitos) {\r",
-											"  var text = \"\";\r",
-											"  var possible = \"0123456789\";\r",
-											"\r",
-											"  for (var i = 0; i < qtdeDigitos; i++)\r",
-											"    text += possible.charAt(Math.floor(Math.random() * possible.length));\r",
-											"\r",
-											"  return text;\r",
-											"}\r",
-											"\r",
-											"var email = \"usuario.padrao1.\" + gerarNumerosAleatorios(4) + \"@outlook.com\";\r",
-											"pm.environment.set(\"email2\", email);"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonDataRequest = JSON.parse(pm.request.body.raw); \r",
-											"var nome = jsonDataRequest.nome;\r",
-											"pm.environment.set(\"nome2\", nome);\r",
-											"\r",
-											"var password = jsonDataRequest.password;\r",
-											"pm.environment.set(\"password2\", password);\r",
-											"\r",
-											"var jsonData = pm.response.json();\r",
-											"var messageObtida = jsonData.message;\r",
-											"var idObtido = jsonData._id;\r",
-											"\r",
-											"var messageEsperada = \"Cadastro realizado com sucesso\";\r",
-											"\r",
-											"pm.test(\"POST usuario (padrão 1) - Validar status 201 Created e dados retornados com sucesso\", function () {\r",
-											"    pm.response.to.have.status(201);\r",
-											"    pm.response.to.have.status(\"Created\");\r",
-											"\r",
-											"    pm.expect(messageObtida).to.include(messageEsperada);\r",
-											"    pm.expect(idObtido).to.exist;\r",
-											"});\r",
-											"\r",
-											"pm.environment.set(\"idPadrao1\", idObtido);"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true,
-									"accept": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nome\": \"Usuário Padrão1\",\r\n    \"email\": \"{{email2}}\",\r\n    \"password\": \"teste1235\",\r\n    \"administrador\": \"false\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{baseUri}}/usuarios"
-							},
-							"response": []
-						},
-						{
-							"name": "POST usuario (padrão 2)",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"function gerarNomeSobrenome(){\r",
-											"    var nome = [\r",
-											"        \"Alice\",\r",
-											"        \"Amanda\",\r",
-											"        \"Ana\",\r",
-											"        \"André\",\r",
-											"        \"Anthony\",\r",
-											"        \"Arthur\",\r",
-											"        \"Augusto\",\r",
-											"        \"Beatriz\",\r",
-											"        \"Benjamin\",\r",
-											"        \"Bernardo\",\r",
-											"        \"Bianca\",\r",
-											"        \"Breno\",\r",
-											"        \"Caio\",\r",
-											"        \"Camila\",\r",
-											"        \"Carla\",\r",
-											"        \"Carolina\",\r",
-											"        \"Catarina\",\r",
-											"        \"Cecília\",\r",
-											"        \"Clara\",\r",
-											"        \"Daniel\",\r",
-											"        \"Davi\",\r",
-											"        \"Diego\",\r",
-											"        \"Eduardo\",\r",
-											"        \"Emanuelly\",\r",
-											"        \"Enzo\",\r",
-											"        \"Evelyn\",\r",
-											"        \"Fábio\",\r",
-											"        \"Felipe\",\r",
-											"        \"Fernando\",\r",
-											"        \"Francisco\",\r",
-											"        \"Gabriel\",\r",
-											"        \"Gabriela\",\r",
-											"        \"Guilherme\",\r",
-											"        \"Gustavo\",\r",
-											"        \"Helena\",\r",
-											"        \"Henrique\",\r",
-											"        \"Isabel\",\r",
-											"        \"Isabela\",\r",
-											"        \"Isabella\",\r",
-											"        \"Isadora\",\r",
-											"        \"Joana\",\r",
-											"        \"João\",\r",
-											"        \"Júlia\",\r",
-											"        \"Juliana\",\r",
-											"        \"Kevin\",\r",
-											"        \"Laís\",\r",
-											"        \"Lara\",\r",
-											"        \"Larissa\",\r",
-											"        \"Laura\",\r",
-											"        \"Lavinia\",\r",
-											"        \"Leonardo\",\r",
-											"        \"Letícia\",\r",
-											"        \"Lívia\",\r",
-											"        \"Lorena\",\r",
-											"        \"Lorenzo\",\r",
-											"        \"Luana\",\r",
-											"        \"Lucas\",\r",
-											"        \"Lucca\",\r",
-											"        \"Luciano\",\r",
-											"        \"Luiza\",\r",
-											"        \"Luna\",\r",
-											"        \"Manuela\",\r",
-											"        \"Marcelo\",\r",
-											"        \"Maria\",\r",
-											"        \"Mariana\",\r",
-											"        \"Mariane\",\r",
-											"        \"Melissa\",\r",
-											"        \"Miguel\",\r",
-											"        \"Mirella\",\r",
-											"        \"Murilo\",\r",
-											"        \"Natália\",\r",
-											"        \"Nathália\",\r",
-											"        \"Nicolas\",\r",
-											"        \"Otávio\",\r",
-											"        \"Paulo\",\r",
-											"        \"Pedro\",\r",
-											"        \"Pietra\",\r",
-											"        \"Rafael\",\r",
-											"        \"Raul\",\r",
-											"        \"Rebeca\",\r",
-											"        \"Ricardo\",\r",
-											"        \"Roberto\",\r",
-											"        \"Rodrigo\",\r",
-											"        \"Ruan\",\r",
-											"        \"Samuel\",\r",
-											"        \"Sofia\",\r",
-											"        \"Sophia\",\r",
-											"        \"Stella\",\r",
-											"        \"Thiago\",\r",
-											"        \"Tomás\",\r",
-											"        \"Valentina\",\r",
-											"        \"Vinícius\",\r",
-											"        \"Vitor\",\r",
-											"        \"Vitória\",\r",
-											"        \"Yasmin\"\r",
-											"    ];\r",
-											"\r",
-											"    var nomeAleatorio = nome[Math.floor(Math.random() * nome.length)];\r",
-											"\r",
-											"    var sobrenome = [\r",
-											"        \"Abreu\",\r",
-											"        \"Aguiar\",\r",
-											"        \"Albuquerque\",\r",
-											"        \"Almeida\",\r",
-											"        \"Alves\",\r",
-											"        \"Andrade\",\r",
-											"        \"Araújo\",\r",
-											"        \"Azevedo\",\r",
-											"        \"Barbosa\",\r",
-											"        \"Barros\",\r",
-											"        \"Batista\",\r",
-											"        \"Borges\",\r",
-											"        \"Braga\",\r",
-											"        \"Campos\",\r",
-											"        \"Cardoso\",\r",
-											"        \"Carneiro\",\r",
-											"        \"Carvalho\",\r",
-											"        \"Castro\",\r",
-											"        \"Cavalcante\",\r",
-											"        \"Cavalcanti\",\r",
-											"        \"Coelho\",\r",
-											"        \"Correia\",\r",
-											"        \"Costa\",\r",
-											"        \"Coutinho\",\r",
-											"        \"Cruz\",\r",
-											"        \"Cunha\",\r",
-											"        \"Dantas\",\r",
-											"        \"Dias\",\r",
-											"        \"Farias\",\r",
-											"        \"Fernandes\",\r",
-											"        \"Ferreira\",\r",
-											"        \"Fialho\",\r",
-											"        \"Figueiredo\",\r",
-											"        \"Fonseca\",\r",
-											"        \"Freitas\",\r",
-											"        \"Furtado\",\r",
-											"        \"Gomes\",\r",
-											"        \"Gonçalves\",\r",
-											"        \"Goulart\",\r",
-											"        \"Gusmão\",\r",
-											"        \"Leite\",\r",
-											"        \"Lemos\",\r",
-											"        \"Lima\",\r",
-											"        \"Lopes\",\r",
-											"        \"Macedo\",\r",
-											"        \"Machado\",\r",
-											"        \"Marques\",\r",
-											"        \"Martins\",\r",
-											"        \"Melo\",\r",
-											"        \"Mendes\",\r",
-											"        \"Monteiro\",\r",
-											"        \"Moraes\",\r",
-											"        \"Morais\",\r",
-											"        \"Moreira\",\r",
-											"        \"Moura\",\r",
-											"        \"Neves\",\r",
-											"        \"Nogueira\",\r",
-											"        \"Nunes\",\r",
-											"        \"Oliveira\",\r",
-											"        \"Pacheco\",\r",
-											"        \"Peixoto\",\r",
-											"        \"Pereira\",\r",
-											"        \"Pires\",\r",
-											"        \"Prado\",\r",
-											"        \"Ramos\",\r",
-											"        \"Rezende\",\r",
-											"        \"Ribeiro\",\r",
-											"        \"Rocha\",\r",
-											"        \"Rodrigues\",\r",
-											"        \"Sales\",\r",
-											"        \"Sampaio\",\r",
-											"        \"Santos\",\r",
-											"        \"Saraiva\",\r",
-											"        \"Silva\",\r",
-											"        \"Silveira\",\r",
-											"        \"Sousa\",\r",
-											"        \"Souza\",\r",
-											"        \"Tavares\",\r",
-											"        \"Teixeira\",\r",
-											"        \"Valente\",\r",
-											"        \"Vargas\",\r",
-											"        \"Vieira\",\r",
-											"        \"Xavier\"\r",
-											"    ];\r",
-											"\r",
-											"    var sobrenomeAleatorio = sobrenome[Math.floor(Math.random() * sobrenome.length)];\r",
-											"    var nomeSobrenome = nomeAleatorio + \" \" + sobrenomeAleatorio;\r",
-											"\r",
-											"    return nomeSobrenome;\r",
-											"}\r",
-											"\r",
-											"function gerarEmail(nomeSobrenome){\r",
-											"    var dominioEmail = [\r",
-											"        \"@gmail.com\",\r",
-											"        \"@outlook.com\",\r",
-											"        \"@yahoo.com\",\r",
-											"        \"@icloud.com\",\r",
-											"        \"@protonmail.com\",\r",
-											"        \"@hotmail.com.br\"\r",
-											"    ];\r",
-											"    \r",
-											"    var dominioEmailAleatorio = dominioEmail[Math.floor(Math.random() * dominioEmail.length)];\r",
-											"    var nomeSobrenomeNormalizado = nomeSobrenome.toLowerCase().replace(/\\s/g,\".\").normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g,\"\");\r",
-											"    var email = nomeSobrenomeNormalizado + dominioEmailAleatorio;\r",
-											"\r",
-											"    return email;\r",
-											"}\r",
-											"\r",
-											"pm.environment.set(\"nome3\", gerarNomeSobrenome());\r",
-											"pm.environment.set(\"email3\", gerarEmail(pm.environment.get(\"nome3\")));"
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonDataRequest = JSON.parse(pm.request.body.raw); \r",
-											"var password = jsonDataRequest.password;\r",
-											"pm.environment.set(\"password3\", password);\r",
-											"\r",
-											"var jsonData = pm.response.json();\r",
-											"var idObtido = jsonData._id;\r",
-											"\r",
-											"pm.test(\"POST usuario (padrão 2) - Validar status 201 Created\", function () {\r",
-											"    pm.response.to.have.status(201);\r",
-											"    pm.response.to.have.status(\"Created\");\r",
-											"});\r",
-											"\r",
-											"pm.environment.set(\"idPadrao2\", idObtido);"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true,
-									"accept": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"nome\": \"{{nome3}}\",\r\n    \"email\": \"{{email3}}\",\r\n    \"password\": \"teste1236\",\r\n    \"administrador\": \"false\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{baseUri}}/usuarios"
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Login",
-					"item": [
-						{
-							"name": "POST login (administrador)",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"var messageObtida = jsonData.message;",
-											"var authorizationObtida = jsonData.authorization;",
-											"",
-											"var messageEsperada = \"Login realizado com sucesso\";",
-											"",
-											"pm.test(\"POST login (administrador) - Validar status 200 OK e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    pm.response.to.have.status(\"OK\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"    pm.expect(authorizationObtida).is.not.null;",
-											"});",
-											"",
-											"pm.environment.set(\"tokenAdministrador\", authorizationObtida);",
-											"",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true,
-									"accept": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"email\": \"{{email1}}\",\n    \"password\": \"{{password1}}\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{baseUri}}/login"
-							},
-							"response": []
-						},
-						{
-							"name": "POST login (padrão 1)",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"var messageObtida = jsonData.message;",
-											"var authorizationObtida = jsonData.authorization;",
-											"",
-											"var messageEsperada = \"Login realizado com sucesso\";",
-											"",
-											"pm.test(\"POST login (padrão 1) - Validar status 200 OK e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    pm.response.to.have.status(\"OK\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"    pm.expect(authorizationObtida).is.not.null;",
-											"});",
-											"",
-											"pm.environment.set(\"tokenPadrao1\", authorizationObtida);",
-											"",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true,
-									"accept": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"email\": \"{{email2}}\",\n    \"password\": \"{{password2}}\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{baseUri}}/login"
-							},
-							"response": []
-						},
-						{
-							"name": "POST login (padrão 2)",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"var authorizationObtida = jsonData.authorization;",
-											"",
-											"var messageEsperada = \"Login realizado com sucesso\";",
-											"",
-											"pm.test(\"POST login (padrão 2) - Validar status 200 OK\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    pm.response.to.have.status(\"OK\");",
-											"});",
-											"",
-											"pm.environment.set(\"tokenPadrao2\", authorizationObtida);",
-											"",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true,
-									"accept": true
-								}
-							},
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"email\": \"{{email3}}\",\n    \"password\": \"{{password3}}\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{baseUri}}/login"
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Produtos",
-					"item": [
-						{
-							"name": "POST produto 1",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"function gerarNumerosAleatorios(qtdeDigitos) {",
-											"  var text = \"\";",
-											"  var possible = \"0123456789\";",
-											"",
-											"  for (var i = 0; i < qtdeDigitos; i++)",
-											"    text += possible.charAt(Math.floor(Math.random() * possible.length));",
-											"",
-											"  return text;",
-											"}",
-											"",
-											"pm.environment.set(\"numero1\", gerarNumerosAleatorios(4));",
-											"pm.environment.set(\"preco1\", gerarNumerosAleatorios(3));",
-											""
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonDataRequest = JSON.parse(pm.request.body.raw); ",
-											"var nomeProduto = jsonDataRequest.nome;",
-											"pm.environment.set(\"nomeProduto1\", nomeProduto);",
-											"",
-											"var descricao = jsonDataRequest.descricao;",
-											"pm.environment.set(\"descricao1\", descricao);",
-											"",
-											"var quantidade = jsonDataRequest.quantidade;",
-											"pm.environment.set(\"quantidadeProduto1\", quantidade);",
-											"",
-											"var jsonData = pm.response.json();",
-											"var messageObtida = jsonData.message;",
-											"var idObtido = jsonData._id;",
-											"",
-											"var messageEsperada = \"Cadastro realizado com sucesso\";",
-											"",
-											"pm.test(\"POST produto 1 - Validar status 201 Created e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(201);",
-											"    pm.response.to.have.status(\"Created\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"    pm.expect(idObtido).is.not.null;",
-											"});",
-											"",
-											"pm.environment.set(\"idProduto1\", idObtido);"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true,
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenAdministrador}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Nome produto 1 - {{numero1}}\", \n    \"preco\": \"{{preco1}}\",\n    \"descricao\": \"Descrição produto 1 - {{numero1}}\",\n    \"quantidade\": \"1\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{baseUri}}/produtos"
-							},
-							"response": []
-						},
-						{
-							"name": "POST produto 2",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"function gerarNumerosAleatorios(qtdeDigitos) {",
-											"  var text = \"\";",
-											"  var possible = \"0123456789\";",
-											"",
-											"  for (var i = 0; i < qtdeDigitos; i++)",
-											"    text += possible.charAt(Math.floor(Math.random() * possible.length));",
-											"",
-											"  return text;",
-											"}",
-											"",
-											"pm.environment.set(\"numero2\", gerarNumerosAleatorios(4));",
-											"pm.environment.set(\"preco2\", gerarNumerosAleatorios(3));"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonDataRequest = JSON.parse(pm.request.body.raw); ",
-											"var nomeProduto = jsonDataRequest.nome;",
-											"pm.environment.set(\"nomeProduto2\", nomeProduto);",
-											"",
-											"var descricao = jsonDataRequest.descricao;",
-											"pm.environment.set(\"descricao2\", descricao);",
-											"",
-											"var quantidade = jsonDataRequest.quantidade;",
-											"pm.environment.set(\"quantidadeProduto2\", quantidade);",
-											"",
-											"var jsonData = pm.response.json();",
-											"var messageObtida = jsonData.message;",
-											"var idObtido = jsonData._id;",
-											"",
-											"var messageEsperada = \"Cadastro realizado com sucesso\";",
-											"",
-											"pm.test(\"POST produto 2 - Validar status 201 Created e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(201);",
-											"    pm.response.to.have.status(\"Created\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"    pm.expect(idObtido).is.not.null;",
-											"});",
-											"",
-											"pm.environment.set(\"idProduto2\", idObtido);"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true,
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenAdministrador}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Nome produto 2 - {{numero2}}\",\n    \"preco\": \"{{preco2}}\",\n    \"descricao\": \"Descrição produto 2 - {{numero2}}\",\n    \"quantidade\": \"{{$randomInt}}\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{baseUri}}/produtos"
-							},
-							"response": []
-						},
-						{
-							"name": "PUT produto 2",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonDataRequest = JSON.parse(pm.request.body.raw); ",
-											"var nomeProduto = jsonDataRequest.nome;",
-											"pm.environment.set(\"nomeProduto2Alterado\", nomeProduto);",
-											"",
-											"var preco = jsonDataRequest.preco;",
-											"pm.environment.set(\"preco2NAOAlterado\", preco);",
-											"",
-											"var descricao = jsonDataRequest.descricao;",
-											"pm.environment.set(\"descricao2NAOAlterada\", descricao);",
-											"",
-											"var quantidade = jsonDataRequest.quantidade;",
-											"pm.environment.set(\"quantidadeProduto2Alterada\", quantidade);",
-											"",
-											"var jsonData = pm.response.json();",
-											"var messageObtida = jsonData.message;",
-											"",
-											"var messageEsperada = \"Registro alterado com sucesso\";",
-											"",
-											"pm.test(\"PUT produto 2 - Validar status 200 OK e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    pm.response.to.have.status(\"OK\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"});"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"function gerarNumerosAleatorios(qtdeDigitos) {",
-											"  var text = \"\";",
-											"  var possible = \"0123456789\";",
-											"",
-											"  for (var i = 0; i < qtdeDigitos; i++)",
-											"    text += possible.charAt(Math.floor(Math.random() * possible.length));",
-											"",
-											"  return text;",
-											"}",
-											"",
-											"pm.environment.set(\"numero3\", gerarNumerosAleatorios(4));"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true,
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenAdministrador}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Nome produto 2 - alterado {{numero3}}\",\n    \"preco\": \"{{preco2}}\",\n    \"descricao\": \"{{descricao2}}\",\n    \"quantidade\": \"100\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{baseUri}}/produtos/{{idProduto2}}"
-							},
-							"response": []
-						},
-						{
-							"name": "POST produto 3",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"function gerarNumerosAleatorios(qtdeDigitos) {",
-											"  var text = \"\";",
-											"  var possible = \"0123456789\";",
-											"",
-											"  for (var i = 0; i < qtdeDigitos; i++)",
-											"    text += possible.charAt(Math.floor(Math.random() * possible.length));",
-											"",
-											"  return text;",
-											"}",
-											"",
-											"pm.environment.set(\"numero4\", gerarNumerosAleatorios(4));",
-											"pm.environment.set(\"preco3\", gerarNumerosAleatorios(3));"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonDataRequest = JSON.parse(pm.request.body.raw); ",
-											"var nomeProduto = jsonDataRequest.nome;",
-											"pm.environment.set(\"nomeProduto3\", nomeProduto);",
-											"",
-											"var descricao = jsonDataRequest.descricao;",
-											"pm.environment.set(\"descricao3\", descricao);",
-											"",
-											"var quantidade = jsonDataRequest.quantidade;",
-											"pm.environment.set(\"quantidadeProduto3\", quantidade);",
-											"",
-											"var jsonData = pm.response.json();",
-											"var messageObtida = jsonData.message;",
-											"var idObtido = jsonData._id;",
-											"",
-											"var messageEsperada = \"Cadastro realizado com sucesso\";",
-											"",
-											"pm.test(\"POST produto 3 - Validar status 201 Created e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(201);",
-											"    pm.response.to.have.status(\"Created\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"    pm.expect(idObtido).is.not.null;",
-											"});",
-											"",
-											"pm.environment.set(\"idProduto3\", idObtido);"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true,
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenAdministrador}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Nome produto 3 - {{numero4}}\",\n    \"preco\": \"{{preco3}}\",\n    \"descricao\": \"Descrição produto 3 - {{numero4}}\",\n    \"quantidade\": \"1001\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{baseUri}}/produtos"
-							},
-							"response": []
-						},
-						{
-							"name": "GET produto/id3",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"pm.environment.set(\"getProdutoSchema\",",
-											"{",
-											"    \"$schema\": \"https://json-schema.org/draft/2019-09/schema\",",
-											"    \"$id\": \"http://example.com/example.json\",",
-											"    \"type\": \"object\",",
-											"    \"default\": {},",
-											"    \"title\": \"Root Schema\",",
-											"    \"required\": [",
-											"        \"nome\",",
-											"        \"preco\",",
-											"        \"descricao\",",
-											"        \"quantidade\",",
-											"        \"_id\"",
-											"    ],",
-											"    \"properties\": {",
-											"        \"nome\": {",
-											"            \"type\": \"string\",",
-											"            \"default\": \"\",",
-											"            \"title\": \"The nome Schema\",",
-											"            \"examples\": [",
-											"                \"Fantastic Wooden Cheese\"",
-											"            ]",
-											"        },",
-											"        \"preco\": {",
-											"            \"type\": \"integer\",",
-											"            \"default\": 0,",
-											"            \"title\": \"The preco Schema\",",
-											"            \"examples\": [",
-											"                293",
-											"            ]",
-											"        },",
-											"        \"descricao\": {",
-											"            \"type\": \"string\",",
-											"            \"default\": \"\",",
-											"            \"title\": \"The descricao Schema\",",
-											"            \"examples\": [",
-											"                \"nesciunt placeat et\"",
-											"            ]",
-											"        },",
-											"        \"quantidade\": {",
-											"            \"type\": \"integer\",",
-											"            \"default\": 0,",
-											"            \"title\": \"The quantidade Schema\",",
-											"            \"examples\": [",
-											"                2",
-											"            ]",
-											"        },",
-											"        \"_id\": {",
-											"            \"type\": \"string\",",
-											"            \"default\": \"\",",
-											"            \"title\": \"The _id Schema\",",
-											"            \"examples\": [",
-											"                \"0ZR7eObfWVE1ccbs\"",
-											"            ]",
-											"        }",
-											"    },",
-											"    \"examples\": [{",
-											"        \"nome\": \"Fantastic Wooden Cheese\",",
-											"        \"preco\": 293,",
-											"        \"descricao\": \"nesciunt placeat et\",",
-											"        \"quantidade\": 2,",
-											"        \"_id\": \"0ZR7eObfWVE1ccbs\"",
-											"    }]",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"var idObtido = jsonData._id;",
-											"",
-											"var idEsperado = pm.environment.get(\"idProduto3\");",
-											"",
-											"getProdutoSchemaEsperado = pm.environment.get(\"getProdutoSchema\");",
-											"",
-											"var estruturaEValida = tv4.validate(jsonData, getProdutoSchemaEsperado);",
-											"if(!estruturaEValida)",
-											"    console.error(tv4.error);",
-											"",
-											"pm.test(\"GET produto/id3 - Validar status 200 OK, dados retornados com sucesso e com schema/estrututura válida\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    pm.response.to.have.status(\"OK\");",
-											"",
-											"    pm.expect(idObtido).to.include(idEsperado);",
-											"",
-											"    pm.expect(estruturaEValida).to.be.true;",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenAdministrador}}",
-										"type": "text"
-									}
-								],
-								"url": "{{baseUri}}/produtos/{{idProduto3}}"
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Carrinhos",
-					"item": [
-						{
-							"name": "POST carrinho - produtos 1 e 2 (administrador)",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"var messageObtida = jsonData.message;",
-											"var idObtido = jsonData._id;",
-											"",
-											"var messageEsperada = \"Cadastro realizado com sucesso\";",
-											"",
-											"pm.test(\"POST carrinho - produtos 1 e 2 (administrador) - Validar status 201 Created e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(201);",
-											"    pm.response.to.have.status(\"Created\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"    pm.expect(idObtido).is.not.null;",
-											"});",
-											"",
-											"pm.environment.set(\"idCarrinho1\", idObtido);"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true,
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenAdministrador}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"produtos\": [\n    {\n      \"idProduto\": \"{{idProduto1}}\",\n      \"quantidade\": \"1\"\n    },\n    {\n      \"idProduto\": \"{{idProduto2}}\",\n      \"quantidade\": \"99\"\n    }\n  ]\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{baseUri}}/carrinhos"
-							},
-							"response": []
-						},
-						{
-							"name": "POST carrinho - produto 3 (padrão 1)",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"var messageObtida = jsonData.message;",
-											"var idObtido = jsonData._id;",
-											"",
-											"var messageEsperada = \"Cadastro realizado com sucesso\";",
-											"",
-											"pm.test(\"POST carrinho - produto 3 (padrão 1) - Validar status 201 Created e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(201);",
-											"    pm.response.to.have.status(\"Created\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"    pm.expect(idObtido).is.not.null;",
-											"});",
-											"",
-											"pm.environment.set(\"idCarrinho2\", idObtido);"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true,
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenPadrao1}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"produtos\": [\n    {\n      \"idProduto\": \"{{idProduto3}}\",\n      \"quantidade\": \"999\"\n    }\n  ]\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{baseUri}}/carrinhos"
-							},
-							"response": []
-						},
-						{
-							"name": "GET ALL carrinhos",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var idCarrinho1Obtido = pm.environment.get(\"idCarrinho1\");\r",
-											"var idCarrinho2Obtido = pm.environment.get(\"idCarrinho2\");\r",
-											"\r",
-											"pm.test(\"GET ALL carrinhos - Validar status 200 OK e alguns dados de \\\"POST carrinho - produtos 1 e 2 (administrador)\\\" e\\\"POST carrinho - produto 3 (padrão 1)\\\" retornados com sucesso\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"    pm.response.to.have.status(\"OK\");\r",
-											"\r",
-											"    pm.expect(pm.response.text()).to.include(idCarrinho1Obtido && idCarrinho2Obtido);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenAdministrador}}",
-										"type": "text"
-									}
-								],
-								"url": "{{baseUri}}/carrinhos"
-							},
-							"response": []
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "campos informados incorretamente",
-			"item": [
-				{
-					"name": "Produtos",
-					"item": [
-						{
-							"name": "POST produto 4 (mesmo nome produto 1)",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"function gerarNumerosAleatorios(qtdeDigitos) {",
-											"  var text = \"\";",
-											"  var possible = \"0123456789\";",
-											"",
-											"  for (var i = 0; i < qtdeDigitos; i++)",
-											"    text += possible.charAt(Math.floor(Math.random() * possible.length));",
-											"",
-											"  return text;",
-											"}",
-											"",
-											"pm.environment.set(\"numero5\", gerarNumerosAleatorios(4));"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonDataRequest = JSON.parse(pm.request.body.raw); ",
-											"var nomeProduto = jsonDataRequest.nome;",
-											"pm.environment.set(\"nomeProduto4\", nomeProduto);",
-											"",
-											"var preco = jsonDataRequest.preco;",
-											"pm.environment.set(\"preco4\", preco);",
-											"",
-											"var descricao = jsonDataRequest.descricao;",
-											"pm.environment.set(\"descricao4\", descricao);",
-											"",
-											"var quantidade = jsonDataRequest.quantidade;",
-											"pm.environment.set(\"quantidadeProduto4\", quantidade);",
-											"",
-											"var jsonData = pm.response.json();",
-											"var messageObtida = jsonData.message;",
-											"",
-											"var messageEsperada = \"Já existe produto com esse nome\";",
-											"",
-											"pm.test(\"POST produto 4 (mesmo nome produto 1) - Validar status 400 Bad Request e dados retornados com erro\", function () {",
-											"    pm.response.to.have.status(400);",
-											"    pm.response.to.have.status(\"Bad Request\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"});"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true,
-									"content-type": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenAdministrador}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"nome\": \"{{nomeProduto1}}\",\n    \"preco\": \"{{$randomInt}}\",\n    \"descricao\": \"Descrição produto 4 - {{numero5}}\",\n    \"quantidade\": \"0\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{baseUri}}/produtos"
-							},
-							"response": []
-						},
-						{
-							"name": "PUT produto 3 (padrão 1)",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"function gerarNumerosAleatorios(qtdeDigitos) {",
-											"  var text = \"\";",
-											"  var possible = \"0123456789\";",
-											"",
-											"  for (var i = 0; i < qtdeDigitos; i++)",
-											"    text += possible.charAt(Math.floor(Math.random() * possible.length));",
-											"",
-											"  return text;",
-											"}",
-											"",
-											"pm.environment.set(\"numero6\", gerarNumerosAleatorios(4));"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonDataRequest = JSON.parse(pm.request.body.raw); ",
-											"var nomeProduto = jsonDataRequest.nome;",
-											"pm.environment.set(\"nomeProduto5\", nomeProduto);",
-											"",
-											"var preco = jsonDataRequest.preco;",
-											"pm.environment.set(\"preco5\", preco);",
-											"",
-											"var descricao = jsonDataRequest.descricao;",
-											"pm.environment.set(\"descricao5\", descricao);",
-											"",
-											"var quantidade = jsonDataRequest.quantidade;",
-											"pm.environment.set(\"quantidadeProduto5\", quantidade);",
-											"",
-											"var jsonData = pm.response.json();",
-											"var messageObtida = jsonData.message;",
-											"",
-											"var messageEsperada = \"Rota exclusiva para administradores\";",
-											"",
-											"pm.test(\"PUT produto 3 (padrão 1) - Validar status 403 Forbidden e dados retornados com erro\", function () {",
-											"    pm.response.to.have.status(403);",
-											"    pm.response.to.have.status(\"Forbidden\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"});"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"content-type": true,
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenPadrao1}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"nome\": \"Nome produto 3 - alterado (padrão 1) - {{numero6}}\",\n    \"preco\": \"{{preco3}}\",\n    \"descricao\": \"{{descricao3}}\",\n    \"quantidade\": \"{{quantidadeProduto3}}\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{baseUri}}/produtos/{{idProduto3}}"
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Carrinhos",
-					"item": [
-						{
-							"name": "GET carrinho/idInexistente",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();\r",
-											"\r",
-											"var messageObtida = jsonData.message;\r",
-											"var messageEsperada = \"Carrinho não encontrado\";\r",
-											"\r",
-											"pm.test(\"GET carrinho/idInexistente - Validar status 400 Bad Request e dados retornados com erro\", function () {\r",
-											"    pm.response.to.have.status(400);\r",
-											"    pm.response.to.have.status(\"Bad Request\");\r",
-											"\r",
-											"    pm.expect(messageObtida).to.include(messageEsperada);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenAdministrador}}",
-										"type": "text"
-									}
-								],
-								"url": "{{baseUri}}/carrinhos/f9f9f9f9f9f9f9f9"
-							},
-							"response": []
-						},
-						{
-							"name": "DEL carrinho/concluir-compra (padrão 2) - carrinho inexistente",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"var messageObtida = jsonData.message;",
-											"var messageEsperada = \"Não foi encontrado carrinho para esse usuário\";",
-											"",
-											"pm.test(\"DEL carrinho/concluir-compra (padrão 2) - carrinho inexistente - Validar status 200 OK e dados retornados com erro\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    pm.response.to.have.status(\"OK\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"});",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenPadrao2}}",
-										"type": "text"
-									}
-								],
-								"url": "{{baseUri}}/carrinhos/concluir-compra"
-							},
-							"response": []
-						},
-						{
-							"name": "DEL carrinho/cancelar-compra (token de acesso ausente)",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"var messageObtida = jsonData.message;",
-											"var messageEsperada = \"Token de acesso ausente, inválido, expirado ou usuário do token não existe mais\";",
-											"",
-											"pm.test(\"DEL carrinho/cancelar-compra (token de acesso ausente) - Validar status 401 Unauthorized e dados retornados com erro\", function () {",
-											"    pm.response.to.have.status(401);",
-											"    pm.response.to.have.status(\"Unauthorized\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": "{{baseUri}}/carrinhos/cancelar-compra"
-							},
-							"response": []
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "limpeza dados",
-			"item": [
-				{
-					"name": "Carrinhos",
-					"item": [
-						{
-							"name": "DEL carrinho/concluir-compra (administrador)",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"var messageObtida = jsonData.message;",
-											"var messageEsperada = \"Registro excluído com sucesso\";",
-											"",
-											"pm.test(\"DEL carrinho/concluir-compra (administrador) - Validar status 200 OK e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    pm.response.to.have.status(\"OK\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"});",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenAdministrador}}",
-										"type": "text"
-									}
-								],
-								"url": "{{baseUri}}/carrinhos/concluir-compra"
-							},
-							"response": []
-						},
-						{
-							"name": "DEL carrinho/cancelar-compra (padrão 1)",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"var messageObtida = jsonData.message;",
-											"var messageEsperada = \"Registro excluído com sucesso. Estoque dos produtos reabastecido\";",
-											"",
-											"pm.test(\"DEL carrinho/cancelar-compra (padrão 1) - Validar status 200 OK e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    pm.response.to.have.status(\"OK\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenPadrao1}}",
-										"type": "text"
-									}
-								],
-								"url": "{{baseUri}}/carrinhos/cancelar-compra"
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Produtos",
-					"item": [
-						{
-							"name": "DEL produto/id1 (administrador)",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"var messageObtida = jsonData.message;",
-											"var messageEsperada = \"Registro excluído com sucesso\";",
-											"",
-											"pm.test(\"DEL produto/id1 (administrador) - Validar status 200 OK e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    pm.response.to.have.status(\"OK\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenAdministrador}}",
-										"type": "text"
-									}
-								],
-								"url": "{{baseUri}}/produtos/{{idProduto1}}"
-							},
-							"response": []
-						},
-						{
-							"name": "DEL produto/id2 (administrador)",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"var messageObtida = jsonData.message;",
-											"var messageEsperada = \"Registro excluído com sucesso\";",
-											"",
-											"pm.test(\"DEL produto/id2 (administrador) - Validar status 200 OK e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    pm.response.to.have.status(\"OK\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenAdministrador}}",
-										"type": "text"
-									}
-								],
-								"url": "{{baseUri}}/produtos/{{idProduto2}}"
-							},
-							"response": []
-						},
-						{
-							"name": "DEL produto/id3 (administrador)",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"var messageObtida = jsonData.message;",
-											"var messageEsperada = \"Registro excluído com sucesso\";",
-											"",
-											"pm.test(\"DEL produto/id3 (administrador) - Validar status 200 OK e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    pm.response.to.have.status(\"OK\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{tokenAdministrador}}",
-										"type": "text"
-									}
-								],
-								"url": "{{baseUri}}/produtos/{{idProduto3}}"
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Usuários",
-					"item": [
-						{
-							"name": "DEL usuario/id (padrão 2)",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"var messageObtida = jsonData.message;",
-											"var messageEsperada = \"Registro excluído com sucesso\";",
-											"",
-											"pm.test(\"DEL usuario/id (padrão 2) - Validar status 200 OK e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    pm.response.to.have.status(\"OK\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": "{{baseUri}}/usuarios/{{idPadrao2}}"
-							},
-							"response": []
-						},
-						{
-							"name": "DEL usuario/id (padrão 1)",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"var messageObtida = jsonData.message;",
-											"var messageEsperada = \"Registro excluído com sucesso\";",
-											"",
-											"pm.test(\"DEL usuario/id (padrão 1) - Validar status 200 OK e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    pm.response.to.have.status(\"OK\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": "{{baseUri}}/usuarios/{{idPadrao1}}"
-							},
-							"response": []
-						},
-						{
-							"name": "DEL usuario/id (administrador)",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"",
-											"var messageObtida = jsonData.message;",
-											"var messageEsperada = \"Registro excluído com sucesso\";",
-											"",
-											"pm.test(\"DEL usuario/id (administrador) - Validar status 200 OK e dados retornados com sucesso\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    pm.response.to.have.status(\"OK\");",
-											"",
-											"    pm.expect(messageObtida).to.include(messageEsperada);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": "{{baseUri}}/usuarios/{{idAdministrador}}"
-							},
-							"response": []
-						}
-					]
-				}
-			]
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	]
+  "info": {
+    "_postman_id": "7d760cb1-9bc8-4f8b-af97-c25b6d7fe14b",
+    "name": "api-serve-rest_collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "25329779"
+  },
+  "item": [
+    {
+      "name": "campos informados corretamente",
+      "item": [
+        {
+          "name": "Usuários",
+          "item": [
+            {
+              "name": "POST /usuarios (usuário administrador)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "function gerarNumeroAleatorio(qtdeDigitos) {\r",
+                      "  var text = \"\";\r",
+                      "  var possible = \"0123456789\";\r",
+                      "\r",
+                      "  for (var i = 0; i < qtdeDigitos; i++)\r",
+                      "    text += possible.charAt(Math.floor(Math.random() * possible.length));\r",
+                      "\r",
+                      "  return text;\r",
+                      "}\r",
+                      "\r",
+                      "var email = \"usuario.admin.\" + gerarNumeroAleatorio(5) + \"@gmail.com\";\r",
+                      "pm.environment.set(\"email1\", email);\r",
+                      "\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonDataRequest = JSON.parse(pm.request.body.raw); \r",
+                      "var nome = jsonDataRequest.nome;\r",
+                      "pm.environment.set(\"nome1\", nome);\r",
+                      "\r",
+                      "var password = jsonDataRequest.password;\r",
+                      "pm.environment.set(\"password1\", password);\r",
+                      "\r",
+                      "var jsonData = pm.response.json();\r",
+                      "var messageObtida = jsonData.message;\r",
+                      "var idObtido = jsonData._id;\r",
+                      "\r",
+                      "var messageEsperada = \"Cadastro realizado com sucesso\";\r",
+                      "\r",
+                      "pm.test(\"Apresentar status 201 Created\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Apresentar mensagem de cadastro realizado com sucesso\", function () {\r",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Apresentar identificador\", function () {\r",
+                      "    pm.expect(idObtido).to.exist;\r",
+                      "});\r",
+                      "\r",
+                      "pm.environment.set(\"idAdministrador\", idObtido);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "content-type": true,
+                  "accept": true
+                }
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"nome\": \"Usuário Admin\",\r\n    \"email\": \"{{email1}}\",\r\n    \"password\": \"teste1234\",\r\n    \"administrador\": \"true\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUri}}/usuarios",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "usuarios"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "POST /usuarios (usuário padrão 1)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "function gerarNumeroAleatorio(qtdeDigitos) {\r",
+                      "  var text = \"\";\r",
+                      "  var possible = \"0123456789\";\r",
+                      "\r",
+                      "  for (var i = 0; i < qtdeDigitos; i++)\r",
+                      "    text += possible.charAt(Math.floor(Math.random() * possible.length));\r",
+                      "\r",
+                      "  return text;\r",
+                      "}\r",
+                      "\r",
+                      "var email = \"usuario.padrao1.\" + gerarNumeroAleatorio(5) + \"@outlook.com\";\r",
+                      "pm.environment.set(\"email2\", email);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonDataRequest = JSON.parse(pm.request.body.raw); \r",
+                      "var nome = jsonDataRequest.nome;\r",
+                      "pm.environment.set(\"nome2\", nome);\r",
+                      "\r",
+                      "var password = jsonDataRequest.password;\r",
+                      "pm.environment.set(\"password2\", password);\r",
+                      "\r",
+                      "var jsonData = pm.response.json();\r",
+                      "var messageObtida = jsonData.message;\r",
+                      "var idObtido = jsonData._id;\r",
+                      "\r",
+                      "var messageEsperada = \"Cadastro realizado com sucesso\";\r",
+                      "\r",
+                      "pm.test(\"Apresentar status 201 Created\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Apresentar mensagem de cadastro realizado com sucesso\", function () {\r",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Apresentar identificador\", function () {\r",
+                      "    pm.expect(idObtido).to.exist;\r",
+                      "});\r",
+                      "\r",
+                      "pm.environment.set(\"idPadrao1\", idObtido);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "content-type": true,
+                  "accept": true
+                }
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"nome\": \"Usuário Padrão1\",\r\n    \"email\": \"{{email2}}\",\r\n    \"password\": \"teste1235\",\r\n    \"administrador\": \"false\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUri}}/usuarios",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "usuarios"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "POST /usuarios (usuário padrão 2)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "function gerarNumeroAleatorio(qtdeDigitos) {\r",
+                      "  var text = \"\";\r",
+                      "  var possible = \"0123456789\";\r",
+                      "\r",
+                      "  for (var i = 0; i < qtdeDigitos; i++)\r",
+                      "    text += possible.charAt(Math.floor(Math.random() * possible.length));\r",
+                      "\r",
+                      "  return text;\r",
+                      "}\r",
+                      "\r",
+                      "function gerarNomeSobrenome(){\r",
+                      "    var nomes = [\r",
+                      "        \"Alice\",\r",
+                      "        \"Amanda\",\r",
+                      "        \"Ana\",\r",
+                      "        \"André\",\r",
+                      "        \"Anthony\",\r",
+                      "        \"Arthur\",\r",
+                      "        \"Augusto\",\r",
+                      "        \"Beatriz\",\r",
+                      "        \"Benjamin\",\r",
+                      "        \"Bernardo\",\r",
+                      "        \"Bianca\",\r",
+                      "        \"Breno\",\r",
+                      "        \"Caio\",\r",
+                      "        \"Camila\",\r",
+                      "        \"Carla\",\r",
+                      "        \"Carolina\",\r",
+                      "        \"Catarina\",\r",
+                      "        \"Cecília\",\r",
+                      "        \"Clara\",\r",
+                      "        \"Daniel\",\r",
+                      "        \"Davi\",\r",
+                      "        \"Diego\",\r",
+                      "        \"Eduardo\",\r",
+                      "        \"Emanuelly\",\r",
+                      "        \"Enzo\",\r",
+                      "        \"Evelyn\",\r",
+                      "        \"Fábio\",\r",
+                      "        \"Felipe\",\r",
+                      "        \"Fernando\",\r",
+                      "        \"Francisco\",\r",
+                      "        \"Gabriel\",\r",
+                      "        \"Gabriela\",\r",
+                      "        \"Guilherme\",\r",
+                      "        \"Gustavo\",\r",
+                      "        \"Helena\",\r",
+                      "        \"Henrique\",\r",
+                      "        \"Isabel\",\r",
+                      "        \"Isabela\",\r",
+                      "        \"Isabella\",\r",
+                      "        \"Isadora\",\r",
+                      "        \"Jó\",\r",
+                      "        \"Joana\",\r",
+                      "        \"João\",\r",
+                      "        \"Júlia\",\r",
+                      "        \"Juliana\",\r",
+                      "        \"Kevin\",\r",
+                      "        \"Laís\",\r",
+                      "        \"Lara\",\r",
+                      "        \"Larissa\",\r",
+                      "        \"Laura\",\r",
+                      "        \"Lavinia\",\r",
+                      "        \"Leonardo\",\r",
+                      "        \"Letícia\",\r",
+                      "        \"Lívia\",\r",
+                      "        \"Ló\",\r",
+                      "        \"Lorena\",\r",
+                      "        \"Lorenzo\",\r",
+                      "        \"Luana\",\r",
+                      "        \"Lucas\",\r",
+                      "        \"Lucca\",\r",
+                      "        \"Luciano\",\r",
+                      "        \"Luiza\",\r",
+                      "        \"Luna\",\r",
+                      "        \"Manuela\",\r",
+                      "        \"Marcelo\",\r",
+                      "        \"Maria\",\r",
+                      "        \"Mariana\",\r",
+                      "        \"Mariane\",\r",
+                      "        \"Melissa\",\r",
+                      "        \"Miguel\",\r",
+                      "        \"Mirella\",\r",
+                      "        \"Murilo\",\r",
+                      "        \"Natália\",\r",
+                      "        \"Nathália\",\r",
+                      "        \"Nicolas\",\r",
+                      "        \"Otávio\",\r",
+                      "        \"Paulo\",\r",
+                      "        \"Pedro\",\r",
+                      "        \"Pietra\",\r",
+                      "        \"Rafael\",\r",
+                      "        \"Raul\",\r",
+                      "        \"Rebeca\",\r",
+                      "        \"Ricardo\",\r",
+                      "        \"Roberto\",\r",
+                      "        \"Rodrigo\",\r",
+                      "        \"Ruan\",\r",
+                      "        \"Samuel\",\r",
+                      "        \"Sofia\",\r",
+                      "        \"Sophia\",\r",
+                      "        \"Stella\",\r",
+                      "        \"Thiago\",\r",
+                      "        \"Tomás\",\r",
+                      "        \"Valentina\",\r",
+                      "        \"Vinícius\",\r",
+                      "        \"Vitor\",\r",
+                      "        \"Vitória\",\r",
+                      "        \"Yasmin\"\r",
+                      "    ];\r",
+                      "\r",
+                      "    var nome = nomes[Math.floor(Math.random() * nomes.length)];\r",
+                      "\r",
+                      "    var sobrenomes = [\r",
+                      "        \"Abreu\",\r",
+                      "        \"Aguiar\",\r",
+                      "        \"Albuquerque\",\r",
+                      "        \"Almeida\",\r",
+                      "        \"Alves\",\r",
+                      "        \"Andrade\",\r",
+                      "        \"Araújo\",\r",
+                      "        \"Azevedo\",\r",
+                      "        \"Barbosa\",\r",
+                      "        \"Barros\",\r",
+                      "        \"Batista\",\r",
+                      "        \"Borges\",\r",
+                      "        \"Braga\",\r",
+                      "        \"Campos\",\r",
+                      "        \"Cardoso\",\r",
+                      "        \"Carneiro\",\r",
+                      "        \"Carvalho\",\r",
+                      "        \"Castro\",\r",
+                      "        \"Cavalcante\",\r",
+                      "        \"Cavalcanti\",\r",
+                      "        \"Coelho\",\r",
+                      "        \"Correia\",\r",
+                      "        \"Costa\",\r",
+                      "        \"Coutinho\",\r",
+                      "        \"Cruz\",\r",
+                      "        \"Cunha\",\r",
+                      "        \"Dantas\",\r",
+                      "        \"Dias\",\r",
+                      "        \"Farias\",\r",
+                      "        \"Fernandes\",\r",
+                      "        \"Ferreira\",\r",
+                      "        \"Fialho\",\r",
+                      "        \"Figueiredo\",\r",
+                      "        \"Fonseca\",\r",
+                      "        \"Freitas\",\r",
+                      "        \"Furtado\",\r",
+                      "        \"Gomes\",\r",
+                      "        \"Gonçalves\",\r",
+                      "        \"Goulart\",\r",
+                      "        \"Gusmão\",\r",
+                      "        \"Leite\",\r",
+                      "        \"Lemos\",\r",
+                      "        \"Lima\",\r",
+                      "        \"Lopes\",\r",
+                      "        \"Lu\",\r",
+                      "        \"Macedo\",\r",
+                      "        \"Machado\",\r",
+                      "        \"Marques\",\r",
+                      "        \"Martins\",\r",
+                      "        \"Melo\",\r",
+                      "        \"Mendes\",\r",
+                      "        \"Monteiro\",\r",
+                      "        \"Moraes\",\r",
+                      "        \"Morais\",\r",
+                      "        \"Moreira\",\r",
+                      "        \"Moura\",\r",
+                      "        \"Neves\",\r",
+                      "        \"Nogueira\",\r",
+                      "        \"Nunes\",\r",
+                      "        \"Oliveira\",\r",
+                      "        \"Pacheco\",\r",
+                      "        \"Peixoto\",\r",
+                      "        \"Pereira\",\r",
+                      "        \"Pires\",\r",
+                      "        \"Prado\",\r",
+                      "        \"Ramos\",\r",
+                      "        \"Rezende\",\r",
+                      "        \"Ribeiro\",\r",
+                      "        \"Rocha\",\r",
+                      "        \"Rodrigues\",\r",
+                      "        \"Sá\",\r",
+                      "        \"Sales\",\r",
+                      "        \"Sampaio\",\r",
+                      "        \"Santos\",\r",
+                      "        \"Saraiva\",\r",
+                      "        \"Silva\",\r",
+                      "        \"Silveira\",\r",
+                      "        \"Sousa\",\r",
+                      "        \"Souza\",\r",
+                      "        \"Tavares\",\r",
+                      "        \"Teixeira\",\r",
+                      "        \"Valente\",\r",
+                      "        \"Vargas\",\r",
+                      "        \"Vieira\",\r",
+                      "        \"Xavier\"\r",
+                      "    ];\r",
+                      "\r",
+                      "    var sobrenome = sobrenomes[Math.floor(Math.random() * sobrenomes.length)];\r",
+                      "    var nomeSobrenome = nome + \" \" + sobrenome;\r",
+                      "\r",
+                      "    return nomeSobrenome;\r",
+                      "}\r",
+                      "\r",
+                      "function gerarEmail(nomeSobrenome){\r",
+                      "    var dominiosEmail = [\r",
+                      "        \"@gmail.com\",\r",
+                      "        \"@outlook.com\",\r",
+                      "        \"@yahoo.com\",\r",
+                      "        \"@icloud.com\",\r",
+                      "        \"@protonmail.com\",\r",
+                      "        \"@hotmail.com.br\"\r",
+                      "    ];\r",
+                      "    \r",
+                      "    var dominioEmail = dominiosEmail[Math.floor(Math.random() * dominiosEmail.length)];\r",
+                      "    var nomeSobrenomeNormalizado = nomeSobrenome.toLowerCase().replace(/\\s/g,\".\").normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g,\"\");\r",
+                      "    var email = nomeSobrenomeNormalizado + \".\" + gerarNumeroAleatorio(5) + dominioEmail;\r",
+                      "\r",
+                      "    return email;\r",
+                      "}\r",
+                      "\r",
+                      "pm.environment.set(\"nome3\", gerarNomeSobrenome());\r",
+                      "pm.environment.set(\"email3\", gerarEmail(pm.environment.get(\"nome3\")));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonDataRequest = JSON.parse(pm.request.body.raw); \r",
+                      "var password = jsonDataRequest.password;\r",
+                      "pm.environment.set(\"password3\", password);\r",
+                      "\r",
+                      "var jsonData = pm.response.json();\r",
+                      "var idObtido = jsonData._id;\r",
+                      "\r",
+                      "pm.test(\"Apresentar status 201 Created\", function () {\r",
+                      "    pm.response.to.have.status(201);\r",
+                      "});\r",
+                      "\r",
+                      "pm.environment.set(\"idPadrao2\", idObtido);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "content-type": true,
+                  "accept": true
+                }
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"nome\": \"{{nome3}}\",\r\n    \"email\": \"{{email3}}\",\r\n    \"password\": \"teste1236\",\r\n    \"administrador\": \"false\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUri}}/usuarios",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "usuarios"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "item": [
+            {
+              "name": "POST /login (usuário administrador)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "var authorizationObtida = jsonData.authorization;",
+                      "",
+                      "var messageEsperada = \"Login realizado com sucesso\";",
+                      "",
+                      "pm.test(\"Apresentar status 200 OK\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de login realizado com sucesso\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar token de autenticação\", function () {",
+                      "    pm.expect(authorizationObtida).to.exist;",
+                      "});",
+                      "",
+                      "pm.environment.set(\"tokenAdministrador\", authorizationObtida);",
+                      "",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "content-type": true,
+                  "accept": true
+                }
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"{{email1}}\",\n    \"password\": \"{{password1}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUri}}/login",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "POST /login (usuário padrão 1)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "var authorizationObtida = jsonData.authorization;",
+                      "",
+                      "var messageEsperada = \"Login realizado com sucesso\";",
+                      "",
+                      "pm.test(\"Apresentar status 200 OK\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de login realizado com sucesso\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar token de autenticação\", function () {",
+                      "    pm.expect(authorizationObtida).to.exist;",
+                      "});",
+                      "",
+                      "pm.environment.set(\"tokenPadrao1\", authorizationObtida);",
+                      "",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "content-type": true,
+                  "accept": true
+                }
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"{{email2}}\",\n    \"password\": \"{{password2}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUri}}/login",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "POST /login (usuário padrão 2)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "var authorizationObtida = jsonData.authorization;",
+                      "",
+                      "pm.test(\"Apresentar status 200 OK\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.environment.set(\"tokenPadrao2\", authorizationObtida);",
+                      "",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "content-type": true,
+                  "accept": true
+                }
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"{{email3}}\",\n    \"password\": \"{{password3}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUri}}/login",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Produtos",
+          "item": [
+            {
+              "name": "POST /produtos (produto 1)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const moment = require('moment');",
+                      "var dataHora = \"\" + moment().format(\"DD.MM.YY-HH:mm:ss\");",
+                      "",
+                      "function gerarNumeroAleatorio(qtdeDigitos) {",
+                      "  var text = \"\";",
+                      "  var possible = \"0123456789\";",
+                      "",
+                      "  for (var i = 0; i < qtdeDigitos; i++)",
+                      "    text += possible.charAt(Math.floor(Math.random() * possible.length));",
+                      "",
+                      "  return text;",
+                      "}",
+                      "",
+                      "pm.environment.set(\"dataHora1\", dataHora);",
+                      "pm.environment.set(\"preco1\", gerarNumeroAleatorio(3));",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonDataRequest = JSON.parse(pm.request.body.raw); ",
+                      "var nomeProduto = jsonDataRequest.nome;",
+                      "pm.environment.set(\"nomeProduto1\", nomeProduto);",
+                      "",
+                      "var descricao = jsonDataRequest.descricao;",
+                      "pm.environment.set(\"descricao1\", descricao);",
+                      "",
+                      "var quantidade = jsonDataRequest.quantidade;",
+                      "pm.environment.set(\"quantidadeProduto1\", quantidade);",
+                      "",
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "var idObtido = jsonData._id;",
+                      "",
+                      "var messageEsperada = \"Cadastro realizado com sucesso\";",
+                      "",
+                      "pm.test(\"Apresentar status 201 Created\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de cadastro realizado com sucesso\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar identificador\", function () {",
+                      "    pm.expect(idObtido).to.be.a('string');",
+                      "});",
+                      "",
+                      "pm.environment.set(\"idProduto1\", idObtido);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "content-type": true,
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenAdministrador}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"nome\": \"Produto 1 - pm{{dataHora1}}\", \n    \"preco\": \"{{preco1}}\",\n    \"descricao\": \"Descrição 1 - pm{{dataHora1}}\",\n    \"quantidade\": \"1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUri}}/produtos",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "produtos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "POST /produtos (produto 2)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const moment = require('moment');",
+                      "var dataHora = \"\" + moment().format(\"DD.MM.YY-HH:mm:ss\");",
+                      "",
+                      "function gerarNumeroAleatorio(qtdeDigitos) {",
+                      "  var text = \"\";",
+                      "  var possible = \"0123456789\";",
+                      "",
+                      "  for (var i = 0; i < qtdeDigitos; i++)",
+                      "    text += possible.charAt(Math.floor(Math.random() * possible.length));",
+                      "",
+                      "  return text;",
+                      "}",
+                      "",
+                      "pm.environment.set(\"dataHora2\", dataHora);",
+                      "pm.environment.set(\"preco2\", gerarNumeroAleatorio(3));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonDataRequest = JSON.parse(pm.request.body.raw); ",
+                      "var nomeProduto = jsonDataRequest.nome;",
+                      "pm.environment.set(\"nomeProduto2\", nomeProduto);",
+                      "",
+                      "var descricao = jsonDataRequest.descricao;",
+                      "pm.environment.set(\"descricao2\", descricao);",
+                      "",
+                      "var quantidade = jsonDataRequest.quantidade;",
+                      "pm.environment.set(\"quantidadeProduto2\", quantidade);",
+                      "",
+                      "var jsonData = pm.response.json();",
+                      "var idObtido = jsonData._id;",
+                      "",
+                      "pm.test(\"Apresentar status 201 Created\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});",
+                      "",
+                      "pm.environment.set(\"idProduto2\", idObtido);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "content-type": true,
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenAdministrador}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"nome\": \"Produto 2 - pm{{dataHora2}}\",\n    \"preco\": \"{{preco2}}\",\n    \"descricao\": \"Descrição 2 - pm{{dataHora2}}\",\n    \"quantidade\": \"{{$randomInt}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUri}}/produtos",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "produtos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "PUT /produtos (produto 2)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonDataRequest = JSON.parse(pm.request.body.raw); ",
+                      "var nomeProduto = jsonDataRequest.nome;",
+                      "pm.environment.set(\"nomeProduto2Alterado\", nomeProduto);",
+                      "",
+                      "var preco = jsonDataRequest.preco;",
+                      "pm.environment.set(\"preco2NAOAlterado\", preco);",
+                      "",
+                      "var descricao = jsonDataRequest.descricao;",
+                      "pm.environment.set(\"descricao2NAOAlterada\", descricao);",
+                      "",
+                      "var quantidade = jsonDataRequest.quantidade;",
+                      "pm.environment.set(\"quantidadeProduto2Alterada\", quantidade);",
+                      "",
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "",
+                      "var messageEsperada = \"Registro alterado com sucesso\";",
+                      "",
+                      "pm.test(\"Apresentar status 200 OK\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de registro alterado com sucesso\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const moment = require('moment');",
+                      "var dataHora = \"\" + moment().format(\"DD.MM.YY-HH:mm:ss\");",
+                      "",
+                      "pm.environment.set(\"dataHora3\", dataHora);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "content-type": true,
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenAdministrador}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"nome\": \"Produto 2 - alterado - pm{{dataHora3}}\",\n    \"preco\": \"{{preco2}}\",\n    \"descricao\": \"{{descricao2}}\",\n    \"quantidade\": \"100\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUri}}/produtos/{{idProduto2}}",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "produtos",
+                    "{{idProduto2}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "POST /produtos (produto 3)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const moment = require('moment');",
+                      "var dataHora = \"\" + moment().format(\"DD.MM.YY-HH:mm:ss\");",
+                      "",
+                      "function gerarNumeroAleatorio(qtdeDigitos) {",
+                      "  var text = \"\";",
+                      "  var possible = \"0123456789\";",
+                      "",
+                      "  for (var i = 0; i < qtdeDigitos; i++)",
+                      "    text += possible.charAt(Math.floor(Math.random() * possible.length));",
+                      "",
+                      "  return text;",
+                      "}",
+                      "",
+                      "pm.environment.set(\"dataHora4\", dataHora);",
+                      "pm.environment.set(\"preco3\", gerarNumeroAleatorio(3));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonDataRequest = JSON.parse(pm.request.body.raw); ",
+                      "var nomeProduto = jsonDataRequest.nome;",
+                      "pm.environment.set(\"nomeProduto3\", nomeProduto);",
+                      "",
+                      "var descricao = jsonDataRequest.descricao;",
+                      "pm.environment.set(\"descricao3\", descricao);",
+                      "",
+                      "var quantidade = jsonDataRequest.quantidade;",
+                      "pm.environment.set(\"quantidadeProduto3\", quantidade);",
+                      "",
+                      "var jsonData = pm.response.json();",
+                      "var idObtido = jsonData._id;",
+                      "",
+                      "pm.test(\"Apresentar status 201 Created\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});",
+                      "",
+                      "pm.environment.set(\"idProduto3\", idObtido);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "content-type": true,
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenAdministrador}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"nome\": \"Produto 3 - pm{{dataHora4}}\",\n    \"preco\": \"{{preco3}}\",\n    \"descricao\": \"Descrição 3 - pm{{dataHora4}}\",\n    \"quantidade\": \"1001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUri}}/produtos",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "produtos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET /produtos (produto 3)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "pm.environment.set(\"getProdutoSchema\",",
+                      "{",
+                      "    \"$schema\": \"https://json-schema.org/draft/2019-09/schema\",",
+                      "    \"$id\": \"http://example.com/example.json\",",
+                      "    \"type\": \"object\",",
+                      "    \"default\": {},",
+                      "    \"title\": \"Root Schema\",",
+                      "    \"required\": [",
+                      "        \"nome\",",
+                      "        \"preco\",",
+                      "        \"descricao\",",
+                      "        \"quantidade\",",
+                      "        \"_id\"",
+                      "    ],",
+                      "    \"properties\": {",
+                      "        \"nome\": {",
+                      "            \"type\": \"string\",",
+                      "            \"default\": \"\",",
+                      "            \"title\": \"The nome Schema\",",
+                      "            \"examples\": [",
+                      "                \"Fantastic Wooden Cheese\"",
+                      "            ]",
+                      "        },",
+                      "        \"preco\": {",
+                      "            \"type\": \"integer\",",
+                      "            \"default\": 0,",
+                      "            \"title\": \"The preco Schema\",",
+                      "            \"examples\": [",
+                      "                293",
+                      "            ]",
+                      "        },",
+                      "        \"descricao\": {",
+                      "            \"type\": \"string\",",
+                      "            \"default\": \"\",",
+                      "            \"title\": \"The descricao Schema\",",
+                      "            \"examples\": [",
+                      "                \"nesciunt placeat et\"",
+                      "            ]",
+                      "        },",
+                      "        \"quantidade\": {",
+                      "            \"type\": \"integer\",",
+                      "            \"default\": 0,",
+                      "            \"title\": \"The quantidade Schema\",",
+                      "            \"examples\": [",
+                      "                2",
+                      "            ]",
+                      "        },",
+                      "        \"_id\": {",
+                      "            \"type\": \"string\",",
+                      "            \"default\": \"\",",
+                      "            \"title\": \"The _id Schema\",",
+                      "            \"examples\": [",
+                      "                \"0ZR7eObfWVE1ccbs\"",
+                      "            ]",
+                      "        }",
+                      "    },",
+                      "    \"examples\": [{",
+                      "        \"nome\": \"Fantastic Wooden Cheese\",",
+                      "        \"preco\": 293,",
+                      "        \"descricao\": \"nesciunt placeat et\",",
+                      "        \"quantidade\": 2,",
+                      "        \"_id\": \"0ZR7eObfWVE1ccbs\"",
+                      "    }]",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "var idObtido = jsonData._id;",
+                      "",
+                      "var idEsperado = pm.environment.get(\"idProduto3\");",
+                      "var getProdutoSchemaEsperado = pm.environment.get(\"getProdutoSchema\");",
+                      "",
+                      "var estruturaEValida = tv4.validate(jsonData, getProdutoSchemaEsperado);",
+                      "if(!estruturaEValida)",
+                      "    console.error(tv4.error);",
+                      "",
+                      "pm.test(\"Apresentar status 200 OK\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar identificador pesquisado anteriormente\", function () {",
+                      "    pm.expect(idObtido).to.include(idEsperado);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar schema/estrututura válida\", function () {",
+                      "    pm.expect(estruturaEValida).to.be.true;",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenAdministrador}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUri}}/produtos/{{idProduto3}}",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "produtos",
+                    "{{idProduto3}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Carrinhos",
+          "item": [
+            {
+              "name": "POST /carrinhos - produtos 1 e 2 (usuário administrador)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "var idObtido = jsonData._id;",
+                      "",
+                      "var messageEsperada = \"Cadastro realizado com sucesso\";",
+                      "",
+                      "pm.test(\"Apresentar status 201 Created\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de cadastro realizado com sucesso\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar identificador\", function () {",
+                      "    pm.expect(idObtido).is.not.null;",
+                      "});",
+                      "",
+                      "pm.environment.set(\"idCarrinho1\", idObtido);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "content-type": true,
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenAdministrador}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"produtos\": [\n        {\n            \"idProduto\": \"{{idProduto1}}\",\n            \"quantidade\": \"1\"\n        },\n        {\n            \"idProduto\": \"{{idProduto2}}\",\n            \"quantidade\": \"99\"\n        }\n    ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUri}}/carrinhos",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "carrinhos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "POST /carrinhos - produto 3 (usuário padrão 1)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "var idObtido = jsonData._id;",
+                      "",
+                      "var messageEsperada = \"Cadastro realizado com sucesso\";",
+                      "",
+                      "pm.test(\"Apresentar status 201 Created\", function () {",
+                      "    pm.response.to.have.status(201);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de cadastro realizado com sucesso\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar identificador\", function () {",
+                      "    pm.expect(idObtido).is.not.null;",
+                      "});",
+                      "",
+                      "pm.environment.set(\"idCarrinho2\", idObtido);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "content-type": true,
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenPadrao1}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"produtos\": [\n        {\n            \"idProduto\": \"{{idProduto3}}\",\n            \"quantidade\": \"999\"\n        }\n    ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUri}}/carrinhos",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "carrinhos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET ALL /carrinhos - carrinho 1 (produtos 1 e 2 - usuário administrador) e carrinho 2 (produto 3 - usuário padrão)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var idCarrinho1Esperado = pm.environment.get(\"idCarrinho1\"); \r",
+                      "var idCarrinho2Esperado = pm.environment.get(\"idCarrinho2\"); \r",
+                      "\r",
+                      "pm.test(\"Apresentar status 200 OK\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Apresentar identificadores carrinho 1 (produtos 1 e 2 - usuário administrador) e carrinho 2 (produto 3 - usuário padrão)\", function () {\r",
+                      "    pm.expect(pm.response.text()).to.include(idCarrinho1Esperado && idCarrinho2Esperado);\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenAdministrador}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUri}}/carrinhos",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "carrinhos"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "campos informados incorretamente",
+      "item": [
+        {
+          "name": "Produtos",
+          "item": [
+            {
+              "name": "POST /produtos - produto 4 (mesmo nome produto 1)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const moment = require('moment');",
+                      "var dataHora = \"\" + moment().format(\"DD.MM.YY-HH:mm:ss\");",
+                      "",
+                      "pm.environment.set(\"dataHora5\", dataHora);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonDataRequest = JSON.parse(pm.request.body.raw); ",
+                      "var nomeProduto = jsonDataRequest.nome;",
+                      "pm.environment.set(\"nomeProduto4\", nomeProduto);",
+                      "",
+                      "var preco = jsonDataRequest.preco;",
+                      "pm.environment.set(\"preco4\", preco);",
+                      "",
+                      "var descricao = jsonDataRequest.descricao;",
+                      "pm.environment.set(\"descricao4\", descricao);",
+                      "",
+                      "var quantidade = jsonDataRequest.quantidade;",
+                      "pm.environment.set(\"quantidadeProduto4\", quantidade);",
+                      "",
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "",
+                      "var messageEsperada = \"Já existe produto com esse nome\";",
+                      "",
+                      "pm.test(\"Apresentar status 400 Bad Request\", function () {",
+                      "    pm.response.to.have.status(400);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de já existir produto com determinado nome\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true,
+                  "content-type": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenAdministrador}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"nome\": \"{{nomeProduto1}}\",\n    \"preco\": \"{{$randomInt}}\",\n    \"descricao\": \"Descrição 4 - pm{{dataHora5}}\",\n    \"quantidade\": \"0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUri}}/produtos",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "produtos"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "PUT /produtos - produto 3 (usuário padrão 1 - não autorizado)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const moment = require('moment');",
+                      "var dataHora = \"\" + moment().format(\"DD.MM.YY-HH:mm:ss\");",
+                      "",
+                      "pm.environment.set(\"dataHora6\", dataHora);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonDataRequest = JSON.parse(pm.request.body.raw); ",
+                      "var nomeProduto = jsonDataRequest.nome;",
+                      "pm.environment.set(\"nomeProduto5\", nomeProduto);",
+                      "",
+                      "var preco = jsonDataRequest.preco;",
+                      "pm.environment.set(\"preco5\", preco);",
+                      "",
+                      "var descricao = jsonDataRequest.descricao;",
+                      "pm.environment.set(\"descricao5\", descricao);",
+                      "",
+                      "var quantidade = jsonDataRequest.quantidade;",
+                      "pm.environment.set(\"quantidadeProduto5\", quantidade);",
+                      "",
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "",
+                      "var messageEsperada = \"Rota exclusiva para administradores\";",
+                      "",
+                      "pm.test(\"Apresentar status 403 Forbidden\", function () {",
+                      "    pm.response.to.have.status(403);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de rota exclusiva para administradores\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "content-type": true,
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenPadrao1}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"nome\": \"Produto 3 - alterado (usuário padrão 1 - não autorizado) - pm{{dataHora6}}\",\n    \"preco\": \"{{preco3}}\",\n    \"descricao\": \"{{descricao3}}\",\n    \"quantidade\": \"{{quantidadeProduto3}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUri}}/produtos/{{idProduto3}}",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "produtos",
+                    "{{idProduto3}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Carrinhos",
+          "item": [
+            {
+              "name": "GET /carrinhos (carrinho inexistente)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();\r",
+                      "var messageObtida = jsonData.message;\r",
+                      "var messageEsperada = \"Carrinho não encontrado\";\r",
+                      "\r",
+                      "pm.test(\"Apresentar status 400 Bad Request\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Apresentar mensagem de carrinho não encontrado\", function () {\r",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenAdministrador}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUri}}/carrinhos/f9f9f9f9f9f9f9f9",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "carrinhos",
+                    "f9f9f9f9f9f9f9f9"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE /carrinhos/concluir-compra (carrinho inexistente - usuário padrão 2)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "var messageEsperada = \"Não foi encontrado carrinho para esse usuário\";",
+                      "",
+                      "pm.test(\"Apresentar status 200 OK\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de não foi encontrado carrinho para determinado usuário\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenPadrao2}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUri}}/carrinhos/concluir-compra",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "carrinhos",
+                    "concluir-compra"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE /carrinhos/cancelar-compra (token de autenticação ausente)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "var messageEsperada = \"Token de acesso ausente, inválido, expirado ou usuário do token não existe mais\";",
+                      "",
+                      "pm.test(\"Apresentar status 401 Unauthorized\", function () {",
+                      "    pm.response.to.have.status(401);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de token de acesso ausente, inválido, expirado ou determinado usuário do token não existir mais\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUri}}/carrinhos/cancelar-compra",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "carrinhos",
+                    "cancelar-compra"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "limpeza dados",
+      "item": [
+        {
+          "name": "Carrinhos",
+          "item": [
+            {
+              "name": "DELETE /carrinhos/concluir-compra (usuário administrador)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "var messageEsperada = \"Registro excluído com sucesso\";",
+                      "",
+                      "pm.test(\"Apresentar status 200 OK\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de registro excluído com sucesso\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenAdministrador}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUri}}/carrinhos/concluir-compra",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "carrinhos",
+                    "concluir-compra"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE /carrinhos/cancelar-compra (usuário padrão 1)",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "var messageEsperada = \"Registro excluído com sucesso. Estoque dos produtos reabastecido\";",
+                      "",
+                      "pm.test(\"Apresentar status 200 OK\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de registro excluído com sucesso e estoque dos produtos reabastecido\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenPadrao1}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUri}}/carrinhos/cancelar-compra",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "carrinhos",
+                    "cancelar-compra"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Produtos",
+          "item": [
+            {
+              "name": "DELETE /produtos (produto 1)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "var messageEsperada = \"Registro excluído com sucesso\";",
+                      "",
+                      "pm.test(\"Apresentar status 200 OK\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de registro excluído com sucesso\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenAdministrador}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUri}}/produtos/{{idProduto1}}",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "produtos",
+                    "{{idProduto1}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE /produtos (produto 2)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Apresentar status 200 OK\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenAdministrador}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUri}}/produtos/{{idProduto2}}",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "produtos",
+                    "{{idProduto2}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE /produtos (produto 3)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "var messageEsperada = \"Registro excluído com sucesso\";",
+                      "",
+                      "pm.test(\"Apresentar status 200 OK\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de registro excluído com sucesso\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true
+                }
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "{{tokenAdministrador}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUri}}/produtos/{{idProduto3}}",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "produtos",
+                    "{{idProduto3}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Usuários",
+          "item": [
+            {
+              "name": "DELETE /usuarios (usuário padrão 2)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Apresentar status 200 OK\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true
+                }
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUri}}/usuarios/{{idPadrao2}}",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "usuarios",
+                    "{{idPadrao2}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE /usuarios (usuário padrão 1)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "var messageEsperada = \"Registro excluído com sucesso\";",
+                      "",
+                      "pm.test(\"Apresentar status 200 OK\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de registro excluído com sucesso\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true
+                }
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUri}}/usuarios/{{idPadrao1}}",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "usuarios",
+                    "{{idPadrao1}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DELETE /usuarios (usuário administrador)",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "var messageObtida = jsonData.message;",
+                      "var messageEsperada = \"Registro excluído com sucesso\";",
+                      "",
+                      "pm.test(\"Apresentar status 200 OK\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Apresentar mensagem de registro excluído com sucesso\", function () {",
+                      "    pm.expect(messageObtida).to.include(messageEsperada);",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                  "accept": true
+                }
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUri}}/usuarios/{{idAdministrador}}",
+                  "host": [
+                    "{{baseUri}}"
+                  ],
+                  "path": [
+                    "usuarios",
+                    "{{idAdministrador}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
 }
